@@ -1,0 +1,12 @@
+FROM carml/caffe2:base-ppc64le-gpu as builder
+MAINTAINER Abdul Dakkak <dakkak@illinois.edu>
+
+RUN go get -u -v github.com/rai-project/caffe2/caffe2-agent && \
+    cd $GOPATH/src/github.com/rai-project/caffe2/caffe2-agent && \
+    glide install && \
+    go install
+
+FROM ubuntu:latest
+
+COPY --from=builder /go/bin/caffe2-agent /usr/bin
+ENTRYPOINT ["caffe2-agent", "--debug", "--verbose"]
