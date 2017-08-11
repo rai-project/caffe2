@@ -1,0 +1,47 @@
+package: github.com/rai-project/caffe2
+import:
+- package: github.com/Unknwon/com
+  version: ~1.0.0
+- package: github.com/anthonynsimon/bild
+  version: ~0.10.0
+  subpackages:
+  - parallel
+- package: github.com/elazarl/go-bindata-assetfs
+- package: github.com/facebookgo/freeport
+- package: github.com/fatih/color
+  version: ~1.5.0
+- package: github.com/gogo/protobuf
+  version: ~0.4.0
+  subpackages:
+  - proto
+- package: github.com/opentracing/opentracing-go
+  version: ~1.0.2
+- package: github.com/pkg/errors
+  version: ~0.8.0
+- package: github.com/rai-project/config
+- package: github.com/rai-project/dlframework
+  subpackages:
+  - framework
+  - framework/agent
+  - framework/predict
+- package: github.com/rai-project/downloadmanager
+- package: github.com/rai-project/go-caffe2
+- package: github.com/rai-project/grpc
+- package: github.com/rai-project/image
+- package: github.com/rai-project/logger
+- package: github.com/rai-project/registry
+- package: github.com/rai-project/utils
+- package: github.com/rai-project/uuid
+- package: github.com/sirupsen/logrus
+  version: ^1.0.0
+- package: github.com/spf13/cobra
+- package: github.com/spf13/viper
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: google.golang.org/grpc
+  version: ~1.5.1
+- package: github.com/stretchr/testify
+  version: ~1.1.4
+  subpackages:
+  - assert
