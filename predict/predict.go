@@ -24,6 +24,7 @@ type ImagePredictor struct {
 	workDir   string
 	features  []string
 	predictor *gocaffe2.Predictor
+	inputDims []int32
 }
 
 func New(model dlframework.ModelManifest) (common.Predictor, error) {
@@ -231,13 +232,9 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 
 	p.features = features
 
-	inputDims, err := p.GetImageDimensions()
+	p.inputDims, err = p.GetImageDimensions()
 	if err != nil {
 		return err
-	}
-	modelInputShape := make([]uint32, len(inputDims))
-	for ii, v := range inputDims {
-		modelInputShape[ii] = uint32(v)
 	}
 
 	pred, err := gocaffe2.New(p.GetGraphPath(), p.GetWeightsPath())
@@ -263,7 +260,7 @@ func (p *ImagePredictor) Predict(ctx context.Context, input interface{}) (*dlfra
 		return nil, errors.New("expecting []float32 input in predict function")
 	}
 
-	predictions, err := p.predictor.Predict(imageData)
+	predictions, err := p.predictor.Predict(imageData, int(p.inputDims[2]), int(p.inputDims[3]), int(p.inputDims[4]))
 	if err != nil {
 		return nil, err
 	}
