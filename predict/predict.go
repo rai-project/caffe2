@@ -260,7 +260,7 @@ func (p *ImagePredictor) Predict(ctx context.Context, input interface{}) (*dlfra
 		return nil, errors.New("expecting []float32 input in predict function")
 	}
 
-	predictions, err := p.predictor.Predict(imageData, int(p.inputDims[2]), int(p.inputDims[3]), int(p.inputDims[4]))
+	predictions, err := p.predictor.Predict(imageData, int(p.inputDims[1]), int(p.inputDims[2]), int(p.inputDims[3]))
 	if err != nil {
 		return nil, err
 	}
