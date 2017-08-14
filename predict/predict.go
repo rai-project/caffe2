@@ -12,6 +12,7 @@ import (
 	"github.com/anthonynsimon/bild/parallel"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
+	"github.com/rai-project/caffe"
 	"github.com/rai-project/caffe2"
 	"github.com/rai-project/config"
 	"github.com/rai-project/dlframework"
@@ -123,6 +124,20 @@ func (p *ImagePredictor) GetMeanPath() string {
 	return filepath.Join(p.workDir, model.GetName()+".mean")
 }
 
+func (p *ImagePredictor) readMeanFromURL(ctx context.Context, url string) ([]float32, error) {
+	targetPath := filepath.Join(p.workDir, "mean.binaryproto")
+	fileName, err := downloadmanager.DownloadFile(ctx, url, targetPath)
+	if err != nil {
+		return nil, err
+	}
+	blob, err := caffe.ReadBlob(fileName)
+	if err != nil {
+		return nil, err
+	}
+
+	return blob.Data, nil
+}
+
 func (p *ImagePredictor) Preprocess(ctx context.Context, input interface{}) (interface{}, error) {
 	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Preprocess"); span != nil {
 		ctx = newCtx
@@ -148,7 +163,7 @@ func (p *ImagePredictor) Preprocess(ctx context.Context, input interface{}) (int
 	height := b.Max.Y - b.Min.Y // image height
 	width := b.Max.X - b.Min.X  // image width
 
-	meanImage, err := p.GetMeanImage(ctx, common.NoMeanImageURLProcessor)
+	meanImage, err := p.GetMeanImage(ctx, p.readMeanFromURL)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get mean image")
 	}
@@ -175,23 +190,13 @@ func (p *ImagePredictor) Preprocess(ctx context.Context, input interface{}) (int
 		for y := start; y < end; y++ {
 			for x := 0; x < width; x++ {
 				r, g, b, _ := img.At(x+b.Min.X, y+b.Min.Y).RGBA()
-				res[y*w+x] = float32(r>>8) - mean[2]
-				res[w*h+y*w+x] = float32(g>>8) - mean[1]
-				res[2*w*h+y*w+x] = float32(b>>8) - mean[0]
+				res[y*w+x] = float32(b>>8) - 128       //mean[0]
+				res[w*h+y*w+x] = float32(g>>8) - 128   // mean[1]
+				res[2*w*h+y*w+x] = float32(r>>8) - 128 //mean[2]
 			}
 		}
 	})
 	return res, nil
-}
-
-// TODO
-func (p *ImagePredictor) readMeanFromURL(ctx context.Context, url string) ([]float32, error) {
-	targetPath := filepath.Join(p.workDir, "mean.binaryproto")
-	_, err := downloadmanager.DownloadFile(ctx, url, targetPath)
-	if err != nil {
-		return nil, err
-	}
-	return nil, nil
 }
 
 func (p *ImagePredictor) Download(ctx context.Context) error {

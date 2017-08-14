@@ -1,7 +1,7 @@
 name: BVLC-AlexNet # name of your model
 framework:
   name: Caffe2 # framework for the model
-  version: 1.0 # framework version contraint
+  version: 0.8.1 # framework version contraint
 version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
            # multiple platforms can be specified
@@ -35,7 +35,7 @@ inputs:
     description: the input image
     parameters: # type parameters
       dimensions: [1, 3, 227, 227]
-      mean: https://github.com/Robert0812/deepsaldet/raw/master/caffe-sal/data/ilsvrc12/imagenet_mean.binaryproto
+      mean: [123, 117, 104]
 output:
   # the type of the output
   type: feature
