@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"image"
 	"os"
-	"path/filepath"
 	"strings"
 
 	context "golang.org/x/net/context"
@@ -12,7 +11,6 @@ import (
 	"github.com/anthonynsimon/bild/parallel"
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/pkg/errors"
-	"github.com/rai-project/caffe"
 	"github.com/rai-project/caffe2"
 	"github.com/rai-project/config"
 	"github.com/rai-project/dlframework"
@@ -25,7 +23,6 @@ import (
 
 type ImagePredictor struct {
 	common.ImagePredictor
-	workDir   string
 	features  []string
 	predictor *gocaffe2.Predictor
 	inputDims []int32
@@ -61,81 +58,11 @@ func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManife
 				Framework: framework,
 				Model:     model,
 			},
+			WorkDir: workDir,
 		},
-		workDir: workDir,
 	}
 
 	return ip, nil
-}
-
-func (p *ImagePredictor) GetWeightsUrl() string {
-	model := p.Model
-	if model.GetModel().GetIsArchive() {
-		return model.GetModel().GetBaseUrl()
-	}
-	baseURL := ""
-	if model.GetModel().GetBaseUrl() != "" {
-		baseURL = strings.TrimSuffix(model.GetModel().GetBaseUrl(), "/") + "/"
-	}
-	return baseURL + model.GetModel().GetWeightsPath()
-}
-
-func (p *ImagePredictor) GetGraphUrl() string {
-	model := p.Model
-	if model.GetModel().GetIsArchive() {
-		return model.GetModel().GetBaseUrl()
-	}
-	baseURL := ""
-	if model.GetModel().GetBaseUrl() != "" {
-		baseURL = strings.TrimSuffix(model.GetModel().GetBaseUrl(), "/") + "/"
-	}
-	return baseURL + model.GetModel().GetGraphPath()
-}
-
-func (p *ImagePredictor) GetFeaturesUrl() string {
-	model := p.Model
-	params := model.GetOutput().GetParameters()
-	pfeats, ok := params["features_url"]
-	if !ok {
-		return ""
-	}
-	return pfeats.Value
-}
-
-func (p *ImagePredictor) GetGraphPath() string {
-	model := p.Model
-	graphPath := filepath.Base(model.GetModel().GetGraphPath())
-	return filepath.Join(p.workDir, graphPath)
-}
-
-func (p *ImagePredictor) GetWeightsPath() string {
-	model := p.Model
-	graphPath := filepath.Base(model.GetModel().GetWeightsPath())
-	return filepath.Join(p.workDir, graphPath)
-}
-
-func (p *ImagePredictor) GetFeaturesPath() string {
-	model := p.Model
-	return filepath.Join(p.workDir, model.GetName()+".features")
-}
-
-func (p *ImagePredictor) GetMeanPath() string {
-	model := p.Model
-	return filepath.Join(p.workDir, model.GetName()+".mean")
-}
-
-func (p *ImagePredictor) readMeanFromURL(ctx context.Context, url string) ([]float32, error) {
-	targetPath := filepath.Join(p.workDir, "mean.binaryproto")
-	fileName, err := downloadmanager.DownloadFile(ctx, url, targetPath)
-	if err != nil {
-		return nil, err
-	}
-	blob, err := caffe.ReadBlob(fileName)
-	if err != nil {
-		return nil, err
-	}
-
-	return blob.Data, nil
 }
 
 func (p *ImagePredictor) Preprocess(ctx context.Context, input interface{}) (interface{}, error) {
@@ -163,24 +90,9 @@ func (p *ImagePredictor) Preprocess(ctx context.Context, input interface{}) (int
 	height := b.Max.Y - b.Min.Y // image height
 	width := b.Max.X - b.Min.X  // image width
 
-	meanImage, err := p.GetMeanImage(ctx, p.readMeanFromURL)
+	mean, err := p.GetMeanImage(ctx, common.NoMeanImageURLProcessor)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get mean image")
-	}
-	mean := [3]float32{0, 0, 0}
-	if len(meanImage) != 3 {
-		for cc := 0; cc < 3; cc++ {
-			accum := float32(0)
-			offset := cc * width * height
-			for ii := 0; ii < height; ii++ {
-				for jj := 0; jj < width; jj++ {
-					accum += meanImage[offset+ii*width+jj]
-				}
-			}
-			mean[cc] = accum / float32(width*height)
-		}
-	} else {
-		copy(mean[:], meanImage[0:2])
 	}
 
 	res := make([]float32, 3*height*width)
@@ -196,6 +108,7 @@ func (p *ImagePredictor) Preprocess(ctx context.Context, input interface{}) (int
 			}
 		}
 	})
+
 	return res, nil
 }
 
@@ -291,6 +204,7 @@ func (p *ImagePredictor) Close() error {
 	if p.predictor != nil {
 		p.predictor.Close()
 	}
+
 	return nil
 }
 
