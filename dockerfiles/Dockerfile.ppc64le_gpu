@@ -2,6 +2,22 @@ FROM carml/go-caffe2:ppc64le-gpu-latest
 MAINTAINER Abdul Dakkak <dakkak@illinois.edu>
 
 
+ # Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VCS_URL
+ARG VERSION
+LABEL org.caffe2.build-date=$BUILD_DATE \
+      org.caffe2.name="caffe2 predictor" \
+      org.caffe2.description="" \
+      org.caffe2.url="https://www.carml.org/" \
+      org.caffe2.vcs-ref=$VCS_REF \
+      org.caffe2.vcs-url=$VCS_URL \
+      org.caffe2.vendor="CarML" \
+      org.caffe2.version=$VERSION \
+      org.caffe2.schema-version="1.0"
+
+
 # Get Go bindings
 ENV PKG github.com/rai-project/caffe2
 WORKDIR $GOPATH/src/$PKG
@@ -13,17 +29,3 @@ RUN git clone --depth=1 --branch=master https://${PKG}.git . && \
     go build -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}"&& \
     go install && \
     rm -fr vendor
-
- # Build-time metadata as defined at http://label-schema.org
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
-LABEL org.caffe2.build-date=$BUILD_DATE \
-      org.caffe2.name="caffe2 predictor" \
-      org.caffe2.description="" \
-      org.caffe2.url="https://www.carml.org/" \
-      org.caffe2.vcs-ref=$VCS_REF \
-      org.caffe2.vcs-url="https://github.com/rai-project/caffe2" \
-      org.caffe2.vendor="CarML" \
-      org.caffe2.version=$VERSION \
-      org.caffe2.schema-version="1.0"
