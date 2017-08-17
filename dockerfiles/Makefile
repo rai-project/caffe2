@@ -8,7 +8,7 @@ build: docker_build output
 release: docker_build docker_push
 
 # Image and binary can be overidden with env vars.
-DOCKER_IMAGE ?= carml/go-caffe2
+DOCKER_IMAGE ?= carml/caffe2
 
 
 # Get System architecture
