@@ -1,0 +1,27 @@
+FROM carml/go-caffe2:amd-cpu-latest
+MAINTAINER Abdul Dakkak <dakkak@illinois.edu>
+
+
+# Get Go bindings
+ENV PKG github.com/rai-project/caffe2
+WORKDIR $GOPATH/src/$PKG
+
+RUN git clone --depth=1 --branch=master https://${PKG}.git . && \
+    glide install && \
+    go build -a -installsuffix cgo -ldflags "-s -w -X ${PKG}/Version=${VERSION} -X ${PKG}/GitCommit=${VCS_REF} -X ${PKG}/BuildDate=${BUILD_DATE}"&& \
+    go install && \
+    rm -fr vendor
+
+ # Build-time metadata as defined at http://label-schema.org
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION
+LABEL org.caffe2.build-date=$BUILD_DATE \
+      org.caffe2.name="caffe2 bindings for go" \
+      org.caffe2.description="" \
+      org.caffe2.url="https://www.carml.org/" \
+      org.caffe2.vcs-ref=$VCS_REF \
+      org.caffe2.vcs-url="https://github.com/rai-project/caffe2" \
+      org.caffe2.vendor="CarML" \
+      org.caffe2.version=$VERSION \
+      org.caffe2.schema-version="1.0"
