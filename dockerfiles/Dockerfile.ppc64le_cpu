@@ -19,7 +19,7 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION
 LABEL org.caffe2.build-date=$BUILD_DATE \
-      org.caffe2.name="caffe2 bindings for go" \
+      org.caffe2.name="caffe2 predictor" \
       org.caffe2.description="" \
       org.caffe2.url="https://www.carml.org/" \
       org.caffe2.vcs-ref=$VCS_REF \
@@ -27,3 +27,4 @@ LABEL org.caffe2.build-date=$BUILD_DATE \
       org.caffe2.vendor="CarML" \
       org.caffe2.version=$VERSION \
       org.caffe2.schema-version="1.0"
+
