@@ -22,7 +22,7 @@ LABEL org.caffe2.agent.build-date=$BUILD_DATE \
 ENV PKG github.com/rai-project/caffe2
 WORKDIR $GOPATH/src/$PKG
 
-RUN git clone --depth=1 --branch=master https://${PKG}.git . && \
+RUN git clone --depth=1 --branch=master $VCS_URL . && \
     glide install && \
     rm -fr vendor/github.com/Sirupsen && \
     find vendor -type f -exec sed -i 's/Sirupsen/sirupsen/g' {} + && \
@@ -31,3 +31,5 @@ RUN git clone --depth=1 --branch=master https://${PKG}.git . && \
     go install && \
     cd .. && \
     rm -fr vendor
+
+ENTRYPOINT ["caffe2-agent", "--debug", "--verbose"]
