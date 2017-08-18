@@ -1,4 +1,4 @@
-FROM carml/go-caffe2:amd64-cpu-latest
+FROM carml/go-caffe2:ppc64le-gpu-latest
 MAINTAINER Abdul Dakkak <dakkak@illinois.edu>
 
 

@@ -1,6 +1,5 @@
-FROM carml/go-caffe2:amd64-cpu-latest
+FROM carml/go-caffe2:ppc64le-cpu-latest
 MAINTAINER Abdul Dakkak <dakkak@illinois.edu>
-
 
  # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -16,7 +15,6 @@ LABEL org.caffe2.agent.build-date=$BUILD_DATE \
       org.caffe2.agent.vendor="CarML" \
       org.caffe2.agent.version=$VERSION \
       org.caffe2.agent.schema-version="1.0"
-
 
 # Get Go bindings
 ENV PKG github.com/rai-project/caffe2
