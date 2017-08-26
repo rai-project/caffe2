@@ -40,7 +40,7 @@ output:
     # type parameters
     features_url: https://raw.githubusercontent.com/rai-project/carml-models/master/data/ilsvrc12/det_synset_words.txt
 model: # specifies model graph and weights resources
-  base_url: https://github.com/rai-project/carml-models/raw/master/caffe2/bvlc_reference-rcnn-ilsvrc13
+  base_url: http://s3.amazonaws.com/store.carml.org/models/caffe2_0.8.1/bvlc_reference-rcnn-ilsvrc13_1.0
   graph_path: predict_net.pb
   weights_path: init_net.pb
   is_archive: false # if set, then the base_url is a url to an archive
