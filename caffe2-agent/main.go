@@ -6,7 +6,7 @@ import (
 
 	"github.com/rai-project/caffe2"
 	_ "github.com/rai-project/caffe2/predict"
-	"github.com/rai-project/dlframework/framework/cmd"
+	cmd "github.com/rai-project/dlframework/framework/cmd/server"
 )
 
 func main() {
