@@ -160,6 +160,11 @@ func (p *ImagePredictor) PreprocessOptions(ctx context.Context) (common.Preproce
 		return common.PreprocessOptions{}, err
 	}
 
+	if len(imageDims) != 4 {
+		return common.PreprocessOptions{},
+			errors.Errorf("the image dimensions size = %v is not equal to 4", len(imageDims))
+	}
+
 	return common.PreprocessOptions{
 		MeanImage: mean,
 		Scale:     scale,
