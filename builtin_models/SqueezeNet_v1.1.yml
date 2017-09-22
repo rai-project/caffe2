@@ -35,6 +35,7 @@ output:
   parameters:
     # type parameters
     features_url: http://data.dmlc.ml/mxnet/models/imagenet/synset.txt
+    features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
   base_url: https://github.com/caffe2/models/raw/master/squeezenet
   graph_path: predict_net.pb
@@ -42,6 +43,8 @@ model: # specifies model graph and weights resources
   is_archive: false # if set, then the base_url is a url to an archive
                     # the graph_path and weights_path then denote the
                     # file names of the graph and weights within the archive
+  graph_checksum: 694bfdd02e9ccb57bfc4acb451fbfb2d
+  weights_checksum: a589d31d93c44d353ae2cd92af4d5a3f
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training

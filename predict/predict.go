@@ -89,22 +89,37 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 	model := p.Model
 	if model.Model.IsArchive {
 		baseURL := model.Model.BaseUrl
-		_, err := downloadmanager.DownloadInto(ctx, baseURL, p.WorkDir)
+		_, err := downloadmanager.DownloadInto(baseURL, p.WorkDir, downloadmanager.Context(ctx))
 		if err != nil {
 			return errors.Wrapf(err, "failed to download model archive from %v", model.Model.BaseUrl)
 		}
 		return nil
 	}
 
-	if _, err := downloadmanager.DownloadFile(ctx, p.GetGraphUrl(), p.GetGraphPath()); err != nil {
+	checksum := p.GetGraphChecksum()
+	if checksum == "" {
+		return errors.New("Need graph file checksum in the model manifest")
+	}
+
+	if _, err := downloadmanager.DownloadFile(p.GetGraphUrl(), p.GetGraphPath(), downloadmanager.MD5Sum(checksum)); err != nil {
 		return err
 	}
 
-	if _, err := downloadmanager.DownloadFile(ctx, p.GetWeightsUrl(), p.GetWeightsPath()); err != nil {
+	checksum = p.GetWeightsChecksum()
+	if checksum == "" {
+		return errors.New("Need weights file checksum in the model manifest")
+	}
+
+	if _, err := downloadmanager.DownloadFile(p.GetWeightsUrl(), p.GetWeightsPath(), downloadmanager.MD5Sum(checksum)); err != nil {
 		return err
 	}
 
-	if _, err := downloadmanager.DownloadFile(ctx, p.GetFeaturesUrl(), p.GetFeaturesPath()); err != nil {
+	checksum = p.GetFeaturesChecksum()
+	if checksum == "" {
+		return errors.New("Need features file checksum in the model manifest")
+	}
+
+	if _, err := downloadmanager.DownloadFile(p.GetFeaturesUrl(), p.GetFeaturesPath(), downloadmanager.MD5Sum(checksum)); err != nil {
 		return err
 	}
 
