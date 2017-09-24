@@ -26,7 +26,7 @@ type ImagePredictor struct {
 	inputDims []uint32
 }
 
-func New(model dlframework.ModelManifest) (common.Predictor, error) {
+func New(model dlframework.ModelManifest, opts dlframework.PredictionOptions) (common.Predictor, error) {
 	modelInputs := model.GetInputs()
 	if len(modelInputs) != 1 {
 		return nil, errors.New("number of inputs not supported")
@@ -39,10 +39,10 @@ func New(model dlframework.ModelManifest) (common.Predictor, error) {
 
 	predictor := new(ImagePredictor)
 
-	return predictor.Load(context.Background(), model)
+	return predictor.Load(context.Background(), model, opts)
 }
 
-func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest) (common.Predictor, error) {
+func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts dlframework.PredictionOptions) (common.Predictor, error) {
 	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Load"); span != nil {
 		ctx = newCtx
 		defer span.Finish()
@@ -61,27 +61,62 @@ func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManife
 	ip := &ImagePredictor{
 		ImagePredictor: common.ImagePredictor{
 			Base: common.Base{
-				Framework: framework,
-				Model:     model,
+				Framework:         framework,
+				Model:             model,
+				PredictionOptions: opts,
 			},
 			WorkDir: workDir,
 		},
 	}
 
-	ip.download(ctx)
-	ip.loadPredictor(ctx)
+	if ip.download(ctx) != nil {
+		return nil, err
+	}
+
+	if ip.loadPredictor(ctx) != nil {
+		return nil, err
+	}
 
 	return ip, nil
 }
 
+func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.PreprocessOptions, error) {
+	mean, err := p.GetMeanImage()
+	if err != nil {
+		return common.PreprocessOptions{}, err
+	}
+
+	scale, err := p.GetScale()
+	if err != nil {
+		return common.PreprocessOptions{}, err
+	}
+
+	imageDims, err := p.GetImageDimensions()
+	if err != nil {
+		return common.PreprocessOptions{}, err
+	}
+
+	return common.PreprocessOptions{
+		MeanImage: mean,
+		Scale:     scale,
+		Size:      []int{int(imageDims[1]), int(imageDims[2])},
+		ColorMode: types.BGRMode,
+	}, nil
+}
+
 func (p *ImagePredictor) download(ctx context.Context) error {
-	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Download"); span != nil {
-		span.SetTag("graph_url", p.GetGraphUrl())
-		span.SetTag("traget_graph_file", p.GetGraphPath())
-		span.SetTag("weights_url", p.GetWeightsUrl())
-		span.SetTag("traget_weights_file", p.GetWeightsPath())
-		span.SetTag("feature_url", p.GetFeaturesUrl())
-		span.SetTag("traget_feature_file", p.GetFeaturesPath())
+	if span, newCtx := opentracing.StartSpanFromContext(
+		ctx,
+		"Download",
+		opentracing.Tags{
+			"graph_url":           p.GetGraphUrl(),
+			"traget_graph_file":   p.GetGraphPath(),
+			"weights_url":         p.GetWeightsUrl(),
+			"traget_weights_file": p.GetWeightsPath(),
+			"feature_url":         p.GetFeaturesUrl(),
+			"traget_feature_file": p.GetFeaturesPath(),
+		},
+	); span != nil {
 		ctx = newCtx
 		defer span.Finish()
 	}
@@ -159,42 +194,18 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 	return nil
 }
 
-func (p *ImagePredictor) PreprocessOptions(ctx context.Context) (common.PreprocessOptions, error) {
-	mean, err := p.GetMeanImage()
-	if err != nil {
-		return common.PreprocessOptions{}, err
-	}
-
-	scale, err := p.GetScale()
-	if err != nil {
-		return common.PreprocessOptions{}, err
-	}
-
-	imageDims, err := p.GetImageDimensions()
-	if err != nil {
-		return common.PreprocessOptions{}, err
-	}
-
-	if len(imageDims) != 4 {
-		return common.PreprocessOptions{},
-			errors.Errorf("the image dimensions size = %v is not equal to 4", len(imageDims))
-	}
-
-	return common.PreprocessOptions{
-		MeanImage: mean,
-		Scale:     scale,
-		Size:      []int{int(imageDims[2]), int(imageDims[3])},
-		ColorMode: types.BGRMode,
-	}, nil
-}
-
-func (p *ImagePredictor) Predict(ctx context.Context, data []float32) (dlframework.Features, error) {
-	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Predict"); span != nil {
+func (p *ImagePredictor) Predict(ctx context.Context, data []float32, opts dlframework.PredictionOptions) (dlframework.Features, error) {
+	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Predict", opentracing.Tags{
+		"model_name":        p.Model.GetName(),
+		"model_version":     p.Model.GetVersion(),
+		"framework_name":    p.Model.GetFramework().GetName(),
+		"framework_version": p.Model.GetFramework().GetVersion(),
+	}); span != nil {
 		ctx = newCtx
 		defer span.Finish()
 	}
 
-	predictions, err := p.predictor.Predict(data, int(p.inputDims[1]), int(p.inputDims[2]), int(p.inputDims[3]))
+	predictions, err := p.predictor.Predict(data, int(p.BatchSize()), int(p.inputDims[0]), int(p.inputDims[1]), int(p.inputDims[2]))
 	if err != nil {
 		return nil, err
 	}
