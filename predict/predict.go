@@ -194,33 +194,46 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 	return nil
 }
 
-func (p *ImagePredictor) Predict(ctx context.Context, data []float32, opts dlframework.PredictionOptions) (dlframework.Features, error) {
+func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts dlframework.PredictionOptions) ([]dlframework.Features, error) {
 	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Predict", opentracing.Tags{
 		"model_name":        p.Model.GetName(),
 		"model_version":     p.Model.GetVersion(),
 		"framework_name":    p.Model.GetFramework().GetName(),
 		"framework_version": p.Model.GetFramework().GetVersion(),
+		"batch_size":        p.BatchSize(),
 	}); span != nil {
 		ctx = newCtx
 		defer span.Finish()
 	}
 
-	predictions, err := p.predictor.Predict(data, int(p.BatchSize()), int(p.inputDims[0]), int(p.inputDims[1]), int(p.inputDims[2]))
+	var input []float32
+	for _, v := range data {
+		input = append(input, v...)
+	}
+
+	predictions, err := p.predictor.Predict(input, int(p.BatchSize()), int(p.inputDims[0]), int(p.inputDims[1]), int(p.inputDims[2]))
 	if err != nil {
 		return nil, err
 	}
 
-	rprobs := make([]*dlframework.Feature, len(predictions))
-	for ii, pred := range predictions {
-		rprobs[ii] = &dlframework.Feature{
-			Index:       int64(pred.Index),
-			Name:        p.features[pred.Index],
-			Probability: pred.Probability,
-		}
+	var output []dlframework.Features
+	batchSize := int(p.BatchSize())
+	if batchSize == 0 {
+		batchSize = 1
 	}
-	res := dlframework.Features(rprobs)
-
-	return res, nil
+	length := len(predictions) / batchSize
+	for i := 0; i < batchSize; i++ {
+		rprobs := make([]*dlframework.Feature, length)
+		for j := 0; j < length; j++ {
+			rprobs[j] = &dlframework.Feature{
+				Index:       int64(j),
+				Name:        p.features[j],
+				Probability: predictions[i*length+j].Probability,
+			}
+		}
+		output = append(output, rprobs)
+	}
+	return output, nil
 }
 
 func (p *ImagePredictor) Reset(ctx context.Context) error {
