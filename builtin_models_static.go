@@ -54,21 +54,32 @@ type bindataFileInfo struct {
 	modTime time.Time
 }
 
+// Name ...
 func (fi bindataFileInfo) Name() string {
 	return fi.name
 }
+
+// Size ...
 func (fi bindataFileInfo) Size() int64 {
 	return fi.size
 }
+
+// Mode ...
 func (fi bindataFileInfo) Mode() os.FileMode {
 	return fi.mode
 }
+
+// ModTime ...
 func (fi bindataFileInfo) ModTime() time.Time {
 	return fi.modTime
 }
+
+// IsDir ...
 func (fi bindataFileInfo) IsDir() bool {
 	return false
 }
+
+// Sys ...
 func (fi bindataFileInfo) Sys() interface{} {
 	return nil
 }
@@ -245,12 +256,12 @@ func AssetNames() []string {
 
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
-	"BVLC-AlexNet.yml": bvlcAlexnetYml,
-	"BVLC-GoogLeNet.yml": bvlcGooglenetYml,
-	"BVLC-Reference-CaffeNet.yml": bvlcReferenceCaffenetYml,
+	"BVLC-AlexNet.yml":                 bvlcAlexnetYml,
+	"BVLC-GoogLeNet.yml":               bvlcGooglenetYml,
+	"BVLC-Reference-CaffeNet.yml":      bvlcReferenceCaffenetYml,
 	"BVLC-Reference-RCNN-ILSVRC13.yml": bvlcReferenceRcnnIlsvrc13Yml,
-	"SqueezeNet_v1.0.yml": squeezenet_v10Yml,
-	"SqueezeNet_v1.1.yml": squeezenet_v11Yml,
+	"SqueezeNet_v1.0.yml":              squeezenet_v10Yml,
+	"SqueezeNet_v1.1.yml":              squeezenet_v11Yml,
 }
 
 // AssetDir returns the file names below a certain
@@ -292,13 +303,14 @@ type bintree struct {
 	Func     func() (*asset, error)
 	Children map[string]*bintree
 }
+
 var _bintree = &bintree{nil, map[string]*bintree{
-	"BVLC-AlexNet.yml": &bintree{bvlcAlexnetYml, map[string]*bintree{}},
-	"BVLC-GoogLeNet.yml": &bintree{bvlcGooglenetYml, map[string]*bintree{}},
-	"BVLC-Reference-CaffeNet.yml": &bintree{bvlcReferenceCaffenetYml, map[string]*bintree{}},
+	"BVLC-AlexNet.yml":                 &bintree{bvlcAlexnetYml, map[string]*bintree{}},
+	"BVLC-GoogLeNet.yml":               &bintree{bvlcGooglenetYml, map[string]*bintree{}},
+	"BVLC-Reference-CaffeNet.yml":      &bintree{bvlcReferenceCaffenetYml, map[string]*bintree{}},
 	"BVLC-Reference-RCNN-ILSVRC13.yml": &bintree{bvlcReferenceRcnnIlsvrc13Yml, map[string]*bintree{}},
-	"SqueezeNet_v1.0.yml": &bintree{squeezenet_v10Yml, map[string]*bintree{}},
-	"SqueezeNet_v1.1.yml": &bintree{squeezenet_v11Yml, map[string]*bintree{}},
+	"SqueezeNet_v1.0.yml":              &bintree{squeezenet_v10Yml, map[string]*bintree{}},
+	"SqueezeNet_v1.1.yml":              &bintree{squeezenet_v11Yml, map[string]*bintree{}},
 }}
 
 // RestoreAsset restores an asset under the given directory
@@ -347,4 +359,3 @@ func _filePath(dir, name string) string {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	return filepath.Join(append([]string{dir}, strings.Split(cannonicalName, "/")...)...)
 }
-

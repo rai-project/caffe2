@@ -21,6 +21,7 @@ import (
 	"github.com/rai-project/tracer/ctimer"
 )
 
+// ImagePredictor ...
 type ImagePredictor struct {
 	common.ImagePredictor
 	features  []string
@@ -28,6 +29,7 @@ type ImagePredictor struct {
 	inputDims []uint32
 }
 
+// New ...
 func New(model dlframework.ModelManifest, opts dlframework.PredictionOptions) (common.Predictor, error) {
 	modelInputs := model.GetInputs()
 	if len(modelInputs) != 1 {
@@ -44,6 +46,7 @@ func New(model dlframework.ModelManifest, opts dlframework.PredictionOptions) (c
 	return predictor.Load(context.Background(), model, opts)
 }
 
+// Load ...
 func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts dlframework.PredictionOptions) (common.Predictor, error) {
 	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Load"); span != nil {
 		ctx = newCtx
@@ -83,6 +86,7 @@ func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManife
 	return ip, nil
 }
 
+// GetPreprocessOptions ...
 func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.PreprocessOptions, error) {
 	mean, err := p.GetMeanImage()
 	if err != nil {
@@ -213,6 +217,7 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 	return nil
 }
 
+// Predict ...
 func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts dlframework.PredictionOptions) ([]dlframework.Features, error) {
 	span, ctx := p.GetTracer().StartSpanFromContext(ctx, "Predict", opentracing.Tags{
 		"model_name":        p.Model.GetName(),
@@ -268,11 +273,13 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts dlf
 	return output, nil
 }
 
+// Reset ...
 func (p *ImagePredictor) Reset(ctx context.Context) error {
 
 	return nil
 }
 
+// Close ...
 func (p *ImagePredictor) Close() error {
 	if p.predictor != nil {
 		p.predictor.Close()

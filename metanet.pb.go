@@ -17,6 +17,7 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// ModelInfo ...
 type ModelInfo struct {
 	Project       string  `protobuf:"bytes,1,opt,name=project" json:"project"`
 	ModelClass    string  `protobuf:"bytes,2,opt,name=modelClass" json:"modelClass"`
@@ -25,13 +26,19 @@ type ModelInfo struct {
 	ModelId       string  `protobuf:"bytes,5,opt,name=modelId" json:"modelId"`
 }
 
-func (m *ModelInfo) Reset()                    { *m = ModelInfo{} }
-func (m *ModelInfo) String() string            { return proto.CompactTextString(m) }
-func (*ModelInfo) ProtoMessage()               {}
+// Reset ...
+func (m *ModelInfo) Reset()                    { *m = ModelInfo{} }                  
+// String ...
+func (m *ModelInfo) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*ModelInfo) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*ModelInfo) Descriptor() ([]byte, []int) { return fileDescriptorMetanet, []int{0} }
 
+// Default_ModelInfo_PredictorType ...
 const Default_ModelInfo_PredictorType string = "SINGLE_PREDICTOR"
 
+// GetProject ...
 func (m *ModelInfo) GetProject() string {
 	if m != nil {
 		return m.Project
@@ -39,6 +46,7 @@ func (m *ModelInfo) GetProject() string {
 	return ""
 }
 
+// GetModelClass ...
 func (m *ModelInfo) GetModelClass() string {
 	if m != nil {
 		return m.ModelClass
@@ -46,6 +54,7 @@ func (m *ModelInfo) GetModelClass() string {
 	return ""
 }
 
+// GetVersion ...
 func (m *ModelInfo) GetVersion() string {
 	if m != nil {
 		return m.Version
@@ -53,6 +62,7 @@ func (m *ModelInfo) GetVersion() string {
 	return ""
 }
 
+// GetPredictorType ...
 func (m *ModelInfo) GetPredictorType() string {
 	if m != nil && m.PredictorType != nil {
 		return *m.PredictorType
@@ -60,6 +70,7 @@ func (m *ModelInfo) GetPredictorType() string {
 	return Default_ModelInfo_PredictorType
 }
 
+// GetModelId ...
 func (m *ModelInfo) GetModelId() string {
 	if m != nil {
 		return m.ModelId
@@ -67,16 +78,22 @@ func (m *ModelInfo) GetModelId() string {
 	return ""
 }
 
+// BlobsMap ...
 type BlobsMap struct {
 	Key   string   `protobuf:"bytes,1,req,name=key" json:"key"`
 	Value []string `protobuf:"bytes,2,rep,name=value" json:"value,omitempty"`
 }
 
-func (m *BlobsMap) Reset()                    { *m = BlobsMap{} }
-func (m *BlobsMap) String() string            { return proto.CompactTextString(m) }
-func (*BlobsMap) ProtoMessage()               {}
+// Reset ...
+func (m *BlobsMap) Reset()                    { *m = BlobsMap{} }                   
+// String ...
+func (m *BlobsMap) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*BlobsMap) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*BlobsMap) Descriptor() ([]byte, []int) { return fileDescriptorMetanet, []int{1} }
 
+// GetKey ...
 func (m *BlobsMap) GetKey() string {
 	if m != nil {
 		return m.Key
@@ -84,6 +101,7 @@ func (m *BlobsMap) GetKey() string {
 	return ""
 }
 
+// GetValue ...
 func (m *BlobsMap) GetValue() []string {
 	if m != nil {
 		return m.Value
@@ -91,16 +109,22 @@ func (m *BlobsMap) GetValue() []string {
 	return nil
 }
 
+// NetsMap ...
 type NetsMap struct {
 	Key   string  `protobuf:"bytes,1,req,name=key" json:"key"`
 	Value *NetDef `protobuf:"bytes,2,req,name=value" json:"value,omitempty"`
 }
 
-func (m *NetsMap) Reset()                    { *m = NetsMap{} }
-func (m *NetsMap) String() string            { return proto.CompactTextString(m) }
-func (*NetsMap) ProtoMessage()               {}
+// Reset ...
+func (m *NetsMap) Reset()                    { *m = NetsMap{} }                    
+// String ...
+func (m *NetsMap) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*NetsMap) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*NetsMap) Descriptor() ([]byte, []int) { return fileDescriptorMetanet, []int{2} }
 
+// GetKey ...
 func (m *NetsMap) GetKey() string {
 	if m != nil {
 		return m.Key
@@ -108,6 +132,7 @@ func (m *NetsMap) GetKey() string {
 	return ""
 }
 
+// GetValue ...
 func (m *NetsMap) GetValue() *NetDef {
 	if m != nil {
 		return m.Value
@@ -115,16 +140,22 @@ func (m *NetsMap) GetValue() *NetDef {
 	return nil
 }
 
+// PlansMap ...
 type PlansMap struct {
 	Key   string   `protobuf:"bytes,1,req,name=key" json:"key"`
 	Value *PlanDef `protobuf:"bytes,2,req,name=value" json:"value,omitempty"`
 }
 
-func (m *PlansMap) Reset()                    { *m = PlansMap{} }
-func (m *PlansMap) String() string            { return proto.CompactTextString(m) }
-func (*PlansMap) ProtoMessage()               {}
+// Reset ...
+func (m *PlansMap) Reset()                    { *m = PlansMap{} }                   
+// String ...
+func (m *PlansMap) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*PlansMap) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*PlansMap) Descriptor() ([]byte, []int) { return fileDescriptorMetanet, []int{3} }
 
+// GetKey ...
 func (m *PlansMap) GetKey() string {
 	if m != nil {
 		return m.Key
@@ -132,6 +163,7 @@ func (m *PlansMap) GetKey() string {
 	return ""
 }
 
+// GetValue ...
 func (m *PlansMap) GetValue() *PlanDef {
 	if m != nil {
 		return m.Value
@@ -139,16 +171,22 @@ func (m *PlansMap) GetValue() *PlanDef {
 	return nil
 }
 
+// StringMap ...
 type StringMap struct {
 	Key   string `protobuf:"bytes,1,req,name=key" json:"key"`
 	Value string `protobuf:"bytes,2,req,name=value" json:"value"`
 }
 
-func (m *StringMap) Reset()                    { *m = StringMap{} }
-func (m *StringMap) String() string            { return proto.CompactTextString(m) }
-func (*StringMap) ProtoMessage()               {}
+// Reset ...
+func (m *StringMap) Reset()                    { *m = StringMap{} }                  
+// String ...
+func (m *StringMap) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*StringMap) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*StringMap) Descriptor() ([]byte, []int) { return fileDescriptorMetanet, []int{4} }
 
+// GetKey ...
 func (m *StringMap) GetKey() string {
 	if m != nil {
 		return m.Key
@@ -156,6 +194,7 @@ func (m *StringMap) GetKey() string {
 	return ""
 }
 
+// GetValue ...
 func (m *StringMap) GetValue() string {
 	if m != nil {
 		return m.Value
@@ -163,6 +202,7 @@ func (m *StringMap) GetValue() string {
 	return ""
 }
 
+// MetaNetDef ...
 type MetaNetDef struct {
 	Blobs []*BlobsMap `protobuf:"bytes,1,rep,name=blobs" json:"blobs,omitempty"`
 	// Text-format serialized NetDefs.
@@ -175,11 +215,16 @@ type MetaNetDef struct {
 	ApplicationSpecificInfo []*StringMap `protobuf:"bytes,5,rep,name=applicationSpecificInfo" json:"applicationSpecificInfo,omitempty"`
 }
 
-func (m *MetaNetDef) Reset()                    { *m = MetaNetDef{} }
-func (m *MetaNetDef) String() string            { return proto.CompactTextString(m) }
-func (*MetaNetDef) ProtoMessage()               {}
+// Reset ...
+func (m *MetaNetDef) Reset()                    { *m = MetaNetDef{} }                 
+// String ...
+func (m *MetaNetDef) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*MetaNetDef) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*MetaNetDef) Descriptor() ([]byte, []int) { return fileDescriptorMetanet, []int{5} }
 
+// GetBlobs ...
 func (m *MetaNetDef) GetBlobs() []*BlobsMap {
 	if m != nil {
 		return m.Blobs
@@ -187,6 +232,7 @@ func (m *MetaNetDef) GetBlobs() []*BlobsMap {
 	return nil
 }
 
+// GetNets ...
 func (m *MetaNetDef) GetNets() []*NetsMap {
 	if m != nil {
 		return m.Nets
@@ -194,6 +240,7 @@ func (m *MetaNetDef) GetNets() []*NetsMap {
 	return nil
 }
 
+// GetModelInfo ...
 func (m *MetaNetDef) GetModelInfo() *ModelInfo {
 	if m != nil {
 		return m.ModelInfo
@@ -201,6 +248,7 @@ func (m *MetaNetDef) GetModelInfo() *ModelInfo {
 	return nil
 }
 
+// GetPlans ...
 func (m *MetaNetDef) GetPlans() []*PlansMap {
 	if m != nil {
 		return m.Plans
@@ -208,6 +256,7 @@ func (m *MetaNetDef) GetPlans() []*PlansMap {
 	return nil
 }
 
+// GetApplicationSpecificInfo ...
 func (m *MetaNetDef) GetApplicationSpecificInfo() []*StringMap {
 	if m != nil {
 		return m.ApplicationSpecificInfo
@@ -222,7 +271,8 @@ func init() {
 	proto.RegisterType((*PlansMap)(nil), "caffe2.PlansMap")
 	proto.RegisterType((*StringMap)(nil), "caffe2.StringMap")
 	proto.RegisterType((*MetaNetDef)(nil), "caffe2.MetaNetDef")
-}
+} 
+// Marshal ...
 func (m *ModelInfo) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -233,6 +283,7 @@ func (m *ModelInfo) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *ModelInfo) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -263,6 +314,7 @@ func (m *ModelInfo) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *BlobsMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -273,6 +325,7 @@ func (m *BlobsMap) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *BlobsMap) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -300,6 +353,7 @@ func (m *BlobsMap) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *NetsMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -310,6 +364,7 @@ func (m *NetsMap) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *NetsMap) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -334,6 +389,7 @@ func (m *NetsMap) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *PlansMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -344,6 +400,7 @@ func (m *PlansMap) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *PlansMap) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -368,6 +425,7 @@ func (m *PlansMap) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *StringMap) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -378,6 +436,7 @@ func (m *StringMap) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *StringMap) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -394,6 +453,7 @@ func (m *StringMap) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *MetaNetDef) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -404,6 +464,7 @@ func (m *MetaNetDef) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *MetaNetDef) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -496,7 +557,8 @@ func encodeVarintMetanet(dAtA []byte, offset int, v uint64) int {
 	}
 	dAtA[offset] = uint8(v)
 	return offset + 1
-}
+} 
+// Size ...
 func (m *ModelInfo) Size() (n int) {
 	var l int
 	_ = l
@@ -515,6 +577,7 @@ func (m *ModelInfo) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *BlobsMap) Size() (n int) {
 	var l int
 	_ = l
@@ -529,6 +592,7 @@ func (m *BlobsMap) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *NetsMap) Size() (n int) {
 	var l int
 	_ = l
@@ -541,6 +605,7 @@ func (m *NetsMap) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *PlansMap) Size() (n int) {
 	var l int
 	_ = l
@@ -553,6 +618,7 @@ func (m *PlansMap) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *StringMap) Size() (n int) {
 	var l int
 	_ = l
@@ -563,6 +629,7 @@ func (m *StringMap) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *MetaNetDef) Size() (n int) {
 	var l int
 	_ = l
@@ -609,7 +676,8 @@ func sovMetanet(x uint64) (n int) {
 }
 func sozMetanet(x uint64) (n int) {
 	return sovMetanet(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
+} 
+// Unmarshal ...
 func (m *ModelInfo) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -805,7 +873,8 @@ func (m *ModelInfo) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *BlobsMap) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -918,7 +987,8 @@ func (m *BlobsMap) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *NetsMap) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -1039,7 +1109,8 @@ func (m *NetsMap) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *PlansMap) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -1160,7 +1231,8 @@ func (m *PlansMap) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *StringMap) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -1277,7 +1349,8 @@ func (m *StringMap) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *MetaNetDef) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1585,6 +1658,7 @@ func skipMetanet(dAtA []byte) (n int, err error) {
 	panic("unreachable")
 }
 
+// ErrInvalidLengthMetanet ...
 var (
 	ErrInvalidLengthMetanet = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowMetanet   = fmt.Errorf("proto: integer overflow")

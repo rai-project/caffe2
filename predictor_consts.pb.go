@@ -15,6 +15,7 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// PredictorConsts ...
 type PredictorConsts struct {
 	// Important - to ensure ordered traversal of the DB, these must be
 	// set in the given (lexicographic) order in the input DBReader.
@@ -34,24 +35,41 @@ type PredictorConsts struct {
 	TRAIN_PLAN_TYPE       *string `protobuf:"bytes,12,opt,name=TRAIN_PLAN_TYPE,json=TRAINPLANTYPE,def=TRAIN_PLAN_TYPE" json:"TRAIN_PLAN_TYPE,omitempty"`
 }
 
-func (m *PredictorConsts) Reset()                    { *m = PredictorConsts{} }
-func (m *PredictorConsts) String() string            { return proto.CompactTextString(m) }
-func (*PredictorConsts) ProtoMessage()               {}
+// Reset ...
+func (m *PredictorConsts) Reset()                    { *m = PredictorConsts{} }            
+// String ...
+func (m *PredictorConsts) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*PredictorConsts) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*PredictorConsts) Descriptor() ([]byte, []int) { return fileDescriptorPredictorConsts, []int{0} }
 
-const Default_PredictorConsts_META_NET_DEF string = "!!META_NET_DEF"
-const Default_PredictorConsts_PREDICTOR_DBREADER string = "!!PREDICTOR_DBREADER"
-const Default_PredictorConsts_PARAMETERS_BLOB_TYPE string = "PARAMETERS_BLOB_TYPE"
-const Default_PredictorConsts_INPUTS_BLOB_TYPE string = "INPUTS_BLOB_TYPE"
-const Default_PredictorConsts_OUTPUTS_BLOB_TYPE string = "OUTPUTS_BLOB_TYPE"
-const Default_PredictorConsts_GLOBAL_INIT_NET_TYPE string = "GLOBAL_INIT_NET_TYPE"
-const Default_PredictorConsts_PREDICT_INIT_NET_TYPE string = "PREDICT_INIT_NET_TYPE"
-const Default_PredictorConsts_PREDICT_NET_TYPE string = "PREDICT_NET_TYPE"
-const Default_PredictorConsts_SINGLE_PREDICTOR string = "SINGLE_PREDICTOR"
-const Default_PredictorConsts_MULTI_PREDICTOR string = "MULTI_PREDICTOR"
-const Default_PredictorConsts_TRAIN_INIT_PLAN_TYPE string = "TRAIN_INIT_PLAN_TYPE"
+// Default_PredictorConsts_META_NET_DEF ...
+const Default_PredictorConsts_META_NET_DEF string = "!!META_NET_DEF"                 
+// Default_PredictorConsts_PREDICTOR_DBREADER ...
+const Default_PredictorConsts_PREDICTOR_DBREADER string = "!!PREDICTOR_DBREADER"     
+// Default_PredictorConsts_PARAMETERS_BLOB_TYPE ...
+const Default_PredictorConsts_PARAMETERS_BLOB_TYPE string = "PARAMETERS_BLOB_TYPE"   
+// Default_PredictorConsts_INPUTS_BLOB_TYPE ...
+const Default_PredictorConsts_INPUTS_BLOB_TYPE string = "INPUTS_BLOB_TYPE"           
+// Default_PredictorConsts_OUTPUTS_BLOB_TYPE ...
+const Default_PredictorConsts_OUTPUTS_BLOB_TYPE string = "OUTPUTS_BLOB_TYPE"         
+// Default_PredictorConsts_GLOBAL_INIT_NET_TYPE ...
+const Default_PredictorConsts_GLOBAL_INIT_NET_TYPE string = "GLOBAL_INIT_NET_TYPE"   
+// Default_PredictorConsts_PREDICT_INIT_NET_TYPE ...
+const Default_PredictorConsts_PREDICT_INIT_NET_TYPE string = "PREDICT_INIT_NET_TYPE" 
+// Default_PredictorConsts_PREDICT_NET_TYPE ...
+const Default_PredictorConsts_PREDICT_NET_TYPE string = "PREDICT_NET_TYPE"           
+// Default_PredictorConsts_SINGLE_PREDICTOR ...
+const Default_PredictorConsts_SINGLE_PREDICTOR string = "SINGLE_PREDICTOR"           
+// Default_PredictorConsts_MULTI_PREDICTOR ...
+const Default_PredictorConsts_MULTI_PREDICTOR string = "MULTI_PREDICTOR"             
+// Default_PredictorConsts_TRAIN_INIT_PLAN_TYPE ...
+const Default_PredictorConsts_TRAIN_INIT_PLAN_TYPE string = "TRAIN_INIT_PLAN_TYPE"   
+// Default_PredictorConsts_TRAIN_PLAN_TYPE ...
 const Default_PredictorConsts_TRAIN_PLAN_TYPE string = "TRAIN_PLAN_TYPE"
 
+// GetMETA_NET_DEF ...
 func (m *PredictorConsts) GetMETA_NET_DEF() string {
 	if m != nil && m.META_NET_DEF != nil {
 		return *m.META_NET_DEF
@@ -59,6 +77,7 @@ func (m *PredictorConsts) GetMETA_NET_DEF() string {
 	return Default_PredictorConsts_META_NET_DEF
 }
 
+// GetPREDICTOR_DBREADER ...
 func (m *PredictorConsts) GetPREDICTOR_DBREADER() string {
 	if m != nil && m.PREDICTOR_DBREADER != nil {
 		return *m.PREDICTOR_DBREADER
@@ -66,6 +85,7 @@ func (m *PredictorConsts) GetPREDICTOR_DBREADER() string {
 	return Default_PredictorConsts_PREDICTOR_DBREADER
 }
 
+// GetPARAMETERS_BLOB_TYPE ...
 func (m *PredictorConsts) GetPARAMETERS_BLOB_TYPE() string {
 	if m != nil && m.PARAMETERS_BLOB_TYPE != nil {
 		return *m.PARAMETERS_BLOB_TYPE
@@ -73,6 +93,7 @@ func (m *PredictorConsts) GetPARAMETERS_BLOB_TYPE() string {
 	return Default_PredictorConsts_PARAMETERS_BLOB_TYPE
 }
 
+// GetINPUTS_BLOB_TYPE ...
 func (m *PredictorConsts) GetINPUTS_BLOB_TYPE() string {
 	if m != nil && m.INPUTS_BLOB_TYPE != nil {
 		return *m.INPUTS_BLOB_TYPE
@@ -80,6 +101,7 @@ func (m *PredictorConsts) GetINPUTS_BLOB_TYPE() string {
 	return Default_PredictorConsts_INPUTS_BLOB_TYPE
 }
 
+// GetOUTPUTS_BLOB_TYPE ...
 func (m *PredictorConsts) GetOUTPUTS_BLOB_TYPE() string {
 	if m != nil && m.OUTPUTS_BLOB_TYPE != nil {
 		return *m.OUTPUTS_BLOB_TYPE
@@ -87,6 +109,7 @@ func (m *PredictorConsts) GetOUTPUTS_BLOB_TYPE() string {
 	return Default_PredictorConsts_OUTPUTS_BLOB_TYPE
 }
 
+// GetGLOBAL_INIT_NET_TYPE ...
 func (m *PredictorConsts) GetGLOBAL_INIT_NET_TYPE() string {
 	if m != nil && m.GLOBAL_INIT_NET_TYPE != nil {
 		return *m.GLOBAL_INIT_NET_TYPE
@@ -94,6 +117,7 @@ func (m *PredictorConsts) GetGLOBAL_INIT_NET_TYPE() string {
 	return Default_PredictorConsts_GLOBAL_INIT_NET_TYPE
 }
 
+// GetPREDICT_INIT_NET_TYPE ...
 func (m *PredictorConsts) GetPREDICT_INIT_NET_TYPE() string {
 	if m != nil && m.PREDICT_INIT_NET_TYPE != nil {
 		return *m.PREDICT_INIT_NET_TYPE
@@ -101,6 +125,7 @@ func (m *PredictorConsts) GetPREDICT_INIT_NET_TYPE() string {
 	return Default_PredictorConsts_PREDICT_INIT_NET_TYPE
 }
 
+// GetPREDICT_NET_TYPE ...
 func (m *PredictorConsts) GetPREDICT_NET_TYPE() string {
 	if m != nil && m.PREDICT_NET_TYPE != nil {
 		return *m.PREDICT_NET_TYPE
@@ -108,6 +133,7 @@ func (m *PredictorConsts) GetPREDICT_NET_TYPE() string {
 	return Default_PredictorConsts_PREDICT_NET_TYPE
 }
 
+// GetSINGLE_PREDICTOR ...
 func (m *PredictorConsts) GetSINGLE_PREDICTOR() string {
 	if m != nil && m.SINGLE_PREDICTOR != nil {
 		return *m.SINGLE_PREDICTOR
@@ -115,6 +141,7 @@ func (m *PredictorConsts) GetSINGLE_PREDICTOR() string {
 	return Default_PredictorConsts_SINGLE_PREDICTOR
 }
 
+// GetMULTI_PREDICTOR ...
 func (m *PredictorConsts) GetMULTI_PREDICTOR() string {
 	if m != nil && m.MULTI_PREDICTOR != nil {
 		return *m.MULTI_PREDICTOR
@@ -122,6 +149,7 @@ func (m *PredictorConsts) GetMULTI_PREDICTOR() string {
 	return Default_PredictorConsts_MULTI_PREDICTOR
 }
 
+// GetTRAIN_INIT_PLAN_TYPE ...
 func (m *PredictorConsts) GetTRAIN_INIT_PLAN_TYPE() string {
 	if m != nil && m.TRAIN_INIT_PLAN_TYPE != nil {
 		return *m.TRAIN_INIT_PLAN_TYPE
@@ -129,6 +157,7 @@ func (m *PredictorConsts) GetTRAIN_INIT_PLAN_TYPE() string {
 	return Default_PredictorConsts_TRAIN_INIT_PLAN_TYPE
 }
 
+// GetTRAIN_PLAN_TYPE ...
 func (m *PredictorConsts) GetTRAIN_PLAN_TYPE() string {
 	if m != nil && m.TRAIN_PLAN_TYPE != nil {
 		return *m.TRAIN_PLAN_TYPE
@@ -138,7 +167,8 @@ func (m *PredictorConsts) GetTRAIN_PLAN_TYPE() string {
 
 func init() {
 	proto.RegisterType((*PredictorConsts)(nil), "caffe2.PredictorConsts")
-}
+} 
+// Marshal ...
 func (m *PredictorConsts) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -149,6 +179,7 @@ func (m *PredictorConsts) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *PredictorConsts) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -255,7 +286,8 @@ func encodeVarintPredictorConsts(dAtA []byte, offset int, v uint64) int {
 	}
 	dAtA[offset] = uint8(v)
 	return offset + 1
-}
+} 
+// Size ...
 func (m *PredictorConsts) Size() (n int) {
 	var l int
 	_ = l
@@ -322,7 +354,8 @@ func sovPredictorConsts(x uint64) (n int) {
 }
 func sozPredictorConsts(x uint64) (n int) {
 	return sovPredictorConsts(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
+} 
+// Unmarshal ...
 func (m *PredictorConsts) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -833,6 +866,7 @@ func skipPredictorConsts(dAtA []byte) (n int, err error) {
 	panic("unreachable")
 }
 
+// ErrInvalidLengthPredictorConsts ...
 var (
 	ErrInvalidLengthPredictorConsts = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowPredictorConsts   = fmt.Errorf("proto: integer overflow")

@@ -27,11 +27,16 @@ type NodeProto struct {
 	Scores  []float32 `protobuf:"fixed32,5,rep,name=scores" json:"scores,omitempty"`
 }
 
-func (m *NodeProto) Reset()                    { *m = NodeProto{} }
-func (m *NodeProto) String() string            { return proto.CompactTextString(m) }
-func (*NodeProto) ProtoMessage()               {}
+// Reset ...
+func (m *NodeProto) Reset()                    { *m = NodeProto{} }                  
+// String ...
+func (m *NodeProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*NodeProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*NodeProto) Descriptor() ([]byte, []int) { return fileDescriptorHsm, []int{0} }
 
+// GetChildren ...
 func (m *NodeProto) GetChildren() []*NodeProto {
 	if m != nil {
 		return m.Children
@@ -39,6 +44,7 @@ func (m *NodeProto) GetChildren() []*NodeProto {
 	return nil
 }
 
+// GetWordIds ...
 func (m *NodeProto) GetWordIds() []int32 {
 	if m != nil {
 		return m.WordIds
@@ -46,6 +52,7 @@ func (m *NodeProto) GetWordIds() []int32 {
 	return nil
 }
 
+// GetOffset ...
 func (m *NodeProto) GetOffset() int32 {
 	if m != nil {
 		return m.Offset
@@ -53,6 +60,7 @@ func (m *NodeProto) GetOffset() int32 {
 	return 0
 }
 
+// GetName ...
 func (m *NodeProto) GetName() string {
 	if m != nil {
 		return m.Name
@@ -60,6 +68,7 @@ func (m *NodeProto) GetName() string {
 	return ""
 }
 
+// GetScores ...
 func (m *NodeProto) GetScores() []float32 {
 	if m != nil {
 		return m.Scores
@@ -73,11 +82,16 @@ type TreeProto struct {
 	RootNode *NodeProto `protobuf:"bytes,1,opt,name=root_node,json=rootNode" json:"root_node,omitempty"`
 }
 
-func (m *TreeProto) Reset()                    { *m = TreeProto{} }
-func (m *TreeProto) String() string            { return proto.CompactTextString(m) }
-func (*TreeProto) ProtoMessage()               {}
+// Reset ...
+func (m *TreeProto) Reset()                    { *m = TreeProto{} }                  
+// String ...
+func (m *TreeProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*TreeProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*TreeProto) Descriptor() ([]byte, []int) { return fileDescriptorHsm, []int{1} }
 
+// GetRootNode ...
 func (m *TreeProto) GetRootNode() *NodeProto {
 	if m != nil {
 		return m.RootNode
@@ -92,11 +106,16 @@ type HierarchyProto struct {
 	Paths []*PathProto `protobuf:"bytes,2,rep,name=paths" json:"paths,omitempty"`
 }
 
-func (m *HierarchyProto) Reset()                    { *m = HierarchyProto{} }
-func (m *HierarchyProto) String() string            { return proto.CompactTextString(m) }
-func (*HierarchyProto) ProtoMessage()               {}
+// Reset ...
+func (m *HierarchyProto) Reset()                    { *m = HierarchyProto{} }             
+// String ...
+func (m *HierarchyProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*HierarchyProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*HierarchyProto) Descriptor() ([]byte, []int) { return fileDescriptorHsm, []int{2} }
 
+// GetSize_ ...
 func (m *HierarchyProto) GetSize_() int32 {
 	if m != nil {
 		return m.Size_
@@ -104,6 +123,7 @@ func (m *HierarchyProto) GetSize_() int32 {
 	return 0
 }
 
+// GetPaths ...
 func (m *HierarchyProto) GetPaths() []*PathProto {
 	if m != nil {
 		return m.Paths
@@ -118,11 +138,16 @@ type PathProto struct {
 	PathNodes []*PathNodeProto `protobuf:"bytes,2,rep,name=path_nodes,json=pathNodes" json:"path_nodes,omitempty"`
 }
 
-func (m *PathProto) Reset()                    { *m = PathProto{} }
-func (m *PathProto) String() string            { return proto.CompactTextString(m) }
-func (*PathProto) ProtoMessage()               {}
+// Reset ...
+func (m *PathProto) Reset()                    { *m = PathProto{} }                  
+// String ...
+func (m *PathProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*PathProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*PathProto) Descriptor() ([]byte, []int) { return fileDescriptorHsm, []int{3} }
 
+// GetWordId ...
 func (m *PathProto) GetWordId() int32 {
 	if m != nil {
 		return m.WordId
@@ -130,6 +155,7 @@ func (m *PathProto) GetWordId() int32 {
 	return 0
 }
 
+// GetPathNodes ...
 func (m *PathProto) GetPathNodes() []*PathNodeProto {
 	if m != nil {
 		return m.PathNodes
@@ -148,11 +174,16 @@ type PathNodeProto struct {
 	Target int32 `protobuf:"varint,3,opt,name=target" json:"target"`
 }
 
-func (m *PathNodeProto) Reset()                    { *m = PathNodeProto{} }
-func (m *PathNodeProto) String() string            { return proto.CompactTextString(m) }
-func (*PathNodeProto) ProtoMessage()               {}
+// Reset ...
+func (m *PathNodeProto) Reset()                    { *m = PathNodeProto{} }              
+// String ...
+func (m *PathNodeProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*PathNodeProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*PathNodeProto) Descriptor() ([]byte, []int) { return fileDescriptorHsm, []int{4} }
 
+// GetIndex ...
 func (m *PathNodeProto) GetIndex() int32 {
 	if m != nil {
 		return m.Index
@@ -160,6 +191,7 @@ func (m *PathNodeProto) GetIndex() int32 {
 	return 0
 }
 
+// GetLength ...
 func (m *PathNodeProto) GetLength() int32 {
 	if m != nil {
 		return m.Length
@@ -167,6 +199,7 @@ func (m *PathNodeProto) GetLength() int32 {
 	return 0
 }
 
+// GetTarget ...
 func (m *PathNodeProto) GetTarget() int32 {
 	if m != nil {
 		return m.Target
@@ -180,7 +213,8 @@ func init() {
 	proto.RegisterType((*HierarchyProto)(nil), "caffe2.HierarchyProto")
 	proto.RegisterType((*PathProto)(nil), "caffe2.PathProto")
 	proto.RegisterType((*PathNodeProto)(nil), "caffe2.PathNodeProto")
-}
+} 
+// Marshal ...
 func (m *NodeProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -191,6 +225,7 @@ func (m *NodeProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *NodeProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -240,6 +275,7 @@ func (m *NodeProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *TreeProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -250,6 +286,7 @@ func (m *TreeProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *TreeProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -268,6 +305,7 @@ func (m *TreeProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *HierarchyProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -278,6 +316,7 @@ func (m *HierarchyProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *HierarchyProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -301,6 +340,7 @@ func (m *HierarchyProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *PathProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -311,6 +351,7 @@ func (m *PathProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *PathProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -334,6 +375,7 @@ func (m *PathProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *PathNodeProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -344,6 +386,7 @@ func (m *PathNodeProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *PathNodeProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -387,7 +430,8 @@ func encodeVarintHsm(dAtA []byte, offset int, v uint64) int {
 	}
 	dAtA[offset] = uint8(v)
 	return offset + 1
-}
+} 
+// Size ...
 func (m *NodeProto) Size() (n int) {
 	var l int
 	_ = l
@@ -411,6 +455,7 @@ func (m *NodeProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *TreeProto) Size() (n int) {
 	var l int
 	_ = l
@@ -421,6 +466,7 @@ func (m *TreeProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *HierarchyProto) Size() (n int) {
 	var l int
 	_ = l
@@ -434,6 +480,7 @@ func (m *HierarchyProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *PathProto) Size() (n int) {
 	var l int
 	_ = l
@@ -447,6 +494,7 @@ func (m *PathProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *PathNodeProto) Size() (n int) {
 	var l int
 	_ = l
@@ -468,7 +516,8 @@ func sovHsm(x uint64) (n int) {
 }
 func sozHsm(x uint64) (n int) {
 	return sovHsm(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
+} 
+// Unmarshal ...
 func (m *NodeProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -711,7 +760,8 @@ func (m *NodeProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *TreeProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -794,7 +844,8 @@ func (m *TreeProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *HierarchyProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -894,7 +945,8 @@ func (m *HierarchyProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *PathProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -994,7 +1046,8 @@ func (m *PathProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *PathNodeProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -1202,6 +1255,7 @@ func skipHsm(dAtA []byte) (n int, err error) {
 	panic("unreachable")
 }
 
+// ErrInvalidLengthHsm ...
 var (
 	ErrInvalidLengthHsm = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowHsm   = fmt.Errorf("proto: integer overflow")

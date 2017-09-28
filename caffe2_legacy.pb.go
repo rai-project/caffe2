@@ -13,8 +13,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+// LegacyPadding ...
 type LegacyPadding int32
 
+// LegacyPadding_NOTSET ...
 const (
 	LegacyPadding_NOTSET LegacyPadding = 0
 	// VALID and SAME are two strategies adopted in Google DistBelief: it forces
@@ -45,12 +47,14 @@ const (
 	LegacyPadding_CAFFE_LEGACY_POOLING LegacyPadding = 3
 )
 
+// LegacyPadding_name ...
 var LegacyPadding_name = map[int32]string{
 	0: "NOTSET",
 	1: "VALID",
 	2: "SAME",
 	3: "CAFFE_LEGACY_POOLING",
-}
+} 
+// LegacyPadding_value ...
 var LegacyPadding_value = map[string]int32{
 	"NOTSET":               0,
 	"VALID":                1,
@@ -58,14 +62,17 @@ var LegacyPadding_value = map[string]int32{
 	"CAFFE_LEGACY_POOLING": 3,
 }
 
+// Enum ...
 func (x LegacyPadding) Enum() *LegacyPadding {
 	p := new(LegacyPadding)
 	*p = x
 	return p
-}
+} 
+// String ...
 func (x LegacyPadding) String() string {
 	return proto.EnumName(LegacyPadding_name, int32(x))
-}
+} 
+// UnmarshalJSON ...
 func (x *LegacyPadding) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(LegacyPadding_value, data, "LegacyPadding")
 	if err != nil {
@@ -73,7 +80,8 @@ func (x *LegacyPadding) UnmarshalJSON(data []byte) error {
 	}
 	*x = LegacyPadding(value)
 	return nil
-}
+}                                                     
+// EnumDescriptor ...
 func (LegacyPadding) EnumDescriptor() ([]byte, []int) { return fileDescriptorCaffe2Legacy, []int{0} }
 
 func init() {

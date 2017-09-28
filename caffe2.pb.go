@@ -47,6 +47,7 @@ const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
 // line in core/blob_serialization.cc.
 type DeviceType int32
 
+// DeviceType_CPU ...
 const (
 	DeviceType_CPU           DeviceType = 0
 	DeviceType_CUDA          DeviceType = 1
@@ -54,12 +55,14 @@ const (
 	DeviceType_ONLY_FOR_TEST DeviceType = 20901701
 )
 
+// DeviceType_name ...
 var DeviceType_name = map[int32]string{
 	0:        "CPU",
 	1:        "CUDA",
 	2:        "MKLDNN",
 	20901701: "ONLY_FOR_TEST",
-}
+} 
+// DeviceType_value ...
 var DeviceType_value = map[string]int32{
 	"CPU":           0,
 	"CUDA":          1,
@@ -67,14 +70,17 @@ var DeviceType_value = map[string]int32{
 	"ONLY_FOR_TEST": 20901701,
 }
 
+// Enum ...
 func (x DeviceType) Enum() *DeviceType {
 	p := new(DeviceType)
 	*p = x
 	return p
-}
+} 
+// String ...
 func (x DeviceType) String() string {
 	return proto.EnumName(DeviceType_name, int32(x))
-}
+} 
+// UnmarshalJSON ...
 func (x *DeviceType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(DeviceType_value, data, "DeviceType")
 	if err != nil {
@@ -82,11 +88,14 @@ func (x *DeviceType) UnmarshalJSON(data []byte) error {
 	}
 	*x = DeviceType(value)
 	return nil
-}
+}                                                  
+// EnumDescriptor ...
 func (DeviceType) EnumDescriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{0} }
 
+// TensorProto_DataType ...
 type TensorProto_DataType int32
 
+// TensorProto_UNDEFINED ...
 const (
 	TensorProto_UNDEFINED TensorProto_DataType = 0
 	TensorProto_FLOAT     TensorProto_DataType = 1
@@ -104,6 +113,7 @@ const (
 	TensorProto_DOUBLE  TensorProto_DataType = 13
 )
 
+// TensorProto_DataType_name ...
 var TensorProto_DataType_name = map[int32]string{
 	0:  "UNDEFINED",
 	1:  "FLOAT",
@@ -118,7 +128,8 @@ var TensorProto_DataType_name = map[int32]string{
 	10: "INT64",
 	12: "FLOAT16",
 	13: "DOUBLE",
-}
+} 
+// TensorProto_DataType_value ...
 var TensorProto_DataType_value = map[string]int32{
 	"UNDEFINED": 0,
 	"FLOAT":     1,
@@ -135,14 +146,17 @@ var TensorProto_DataType_value = map[string]int32{
 	"DOUBLE":    13,
 }
 
+// Enum ...
 func (x TensorProto_DataType) Enum() *TensorProto_DataType {
 	p := new(TensorProto_DataType)
 	*p = x
 	return p
-}
+} 
+// String ...
 func (x TensorProto_DataType) String() string {
 	return proto.EnumName(TensorProto_DataType_name, int32(x))
-}
+} 
+// UnmarshalJSON ...
 func (x *TensorProto_DataType) UnmarshalJSON(data []byte) error {
 	value, err := proto.UnmarshalJSONEnum(TensorProto_DataType_value, data, "TensorProto_DataType")
 	if err != nil {
@@ -150,7 +164,8 @@ func (x *TensorProto_DataType) UnmarshalJSON(data []byte) error {
 	}
 	*x = TensorProto_DataType(value)
 	return nil
-}
+}                                                            
+// EnumDescriptor ...
 func (TensorProto_DataType) EnumDescriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{0, 0} }
 
 // TensorProto stores serialized Tensor objects.
@@ -181,13 +196,19 @@ type TensorProto struct {
 	Segment      *TensorProto_Segment `protobuf:"bytes,11,opt,name=segment" json:"segment,omitempty"`
 }
 
-func (m *TensorProto) Reset()                    { *m = TensorProto{} }
-func (m *TensorProto) String() string            { return proto.CompactTextString(m) }
-func (*TensorProto) ProtoMessage()               {}
+// Reset ...
+func (m *TensorProto) Reset()                    { *m = TensorProto{} }                
+// String ...
+func (m *TensorProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*TensorProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*TensorProto) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{0} }
 
+// Default_TensorProto_DataType ...
 const Default_TensorProto_DataType TensorProto_DataType = TensorProto_FLOAT
 
+// GetDims ...
 func (m *TensorProto) GetDims() []int64 {
 	if m != nil {
 		return m.Dims
@@ -195,6 +216,7 @@ func (m *TensorProto) GetDims() []int64 {
 	return nil
 }
 
+// GetDataType ...
 func (m *TensorProto) GetDataType() TensorProto_DataType {
 	if m != nil && m.DataType != nil {
 		return *m.DataType
@@ -202,6 +224,7 @@ func (m *TensorProto) GetDataType() TensorProto_DataType {
 	return Default_TensorProto_DataType
 }
 
+// GetFloatData ...
 func (m *TensorProto) GetFloatData() []float32 {
 	if m != nil {
 		return m.FloatData
@@ -209,6 +232,7 @@ func (m *TensorProto) GetFloatData() []float32 {
 	return nil
 }
 
+// GetInt32Data ...
 func (m *TensorProto) GetInt32Data() []int32 {
 	if m != nil {
 		return m.Int32Data
@@ -216,6 +240,7 @@ func (m *TensorProto) GetInt32Data() []int32 {
 	return nil
 }
 
+// GetByteData ...
 func (m *TensorProto) GetByteData() []byte {
 	if m != nil {
 		return m.ByteData
@@ -223,6 +248,7 @@ func (m *TensorProto) GetByteData() []byte {
 	return nil
 }
 
+// GetStringData ...
 func (m *TensorProto) GetStringData() [][]byte {
 	if m != nil {
 		return m.StringData
@@ -230,6 +256,7 @@ func (m *TensorProto) GetStringData() [][]byte {
 	return nil
 }
 
+// GetDoubleData ...
 func (m *TensorProto) GetDoubleData() []float64 {
 	if m != nil {
 		return m.DoubleData
@@ -237,6 +264,7 @@ func (m *TensorProto) GetDoubleData() []float64 {
 	return nil
 }
 
+// GetInt64Data ...
 func (m *TensorProto) GetInt64Data() []int64 {
 	if m != nil {
 		return m.Int64Data
@@ -244,6 +272,7 @@ func (m *TensorProto) GetInt64Data() []int64 {
 	return nil
 }
 
+// GetName ...
 func (m *TensorProto) GetName() string {
 	if m != nil {
 		return m.Name
@@ -251,6 +280,7 @@ func (m *TensorProto) GetName() string {
 	return ""
 }
 
+// GetDeviceDetail ...
 func (m *TensorProto) GetDeviceDetail() *DeviceOption {
 	if m != nil {
 		return m.DeviceDetail
@@ -258,6 +288,7 @@ func (m *TensorProto) GetDeviceDetail() *DeviceOption {
 	return nil
 }
 
+// GetSegment ...
 func (m *TensorProto) GetSegment() *TensorProto_Segment {
 	if m != nil {
 		return m.Segment
@@ -272,11 +303,16 @@ type TensorProto_Segment struct {
 	End   int64 `protobuf:"varint,2,req,name=end" json:"end"`
 }
 
-func (m *TensorProto_Segment) Reset()                    { *m = TensorProto_Segment{} }
-func (m *TensorProto_Segment) String() string            { return proto.CompactTextString(m) }
-func (*TensorProto_Segment) ProtoMessage()               {}
+// Reset ...
+func (m *TensorProto_Segment) Reset()                    { *m = TensorProto_Segment{} }        
+// String ...
+func (m *TensorProto_Segment) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*TensorProto_Segment) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*TensorProto_Segment) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{0, 0} }
 
+// GetBegin ...
 func (m *TensorProto_Segment) GetBegin() int64 {
 	if m != nil {
 		return m.Begin
@@ -284,6 +320,7 @@ func (m *TensorProto_Segment) GetBegin() int64 {
 	return 0
 }
 
+// GetEnd ...
 func (m *TensorProto_Segment) GetEnd() int64 {
 	if m != nil {
 		return m.End
@@ -291,6 +328,7 @@ func (m *TensorProto_Segment) GetEnd() int64 {
 	return 0
 }
 
+// QTensorProto ...
 type QTensorProto struct {
 	Dims      []int64 `protobuf:"varint,1,rep,name=dims" json:"dims,omitempty"`
 	Precision int32   `protobuf:"varint,2,req,name=precision" json:"precision"`
@@ -301,11 +339,16 @@ type QTensorProto struct {
 	Name      string  `protobuf:"bytes,7,opt,name=name" json:"name"`
 }
 
-func (m *QTensorProto) Reset()                    { *m = QTensorProto{} }
-func (m *QTensorProto) String() string            { return proto.CompactTextString(m) }
-func (*QTensorProto) ProtoMessage()               {}
+// Reset ...
+func (m *QTensorProto) Reset()                    { *m = QTensorProto{} }               
+// String ...
+func (m *QTensorProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*QTensorProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*QTensorProto) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{1} }
 
+// GetDims ...
 func (m *QTensorProto) GetDims() []int64 {
 	if m != nil {
 		return m.Dims
@@ -313,6 +356,7 @@ func (m *QTensorProto) GetDims() []int64 {
 	return nil
 }
 
+// GetPrecision ...
 func (m *QTensorProto) GetPrecision() int32 {
 	if m != nil {
 		return m.Precision
@@ -320,6 +364,7 @@ func (m *QTensorProto) GetPrecision() int32 {
 	return 0
 }
 
+// GetScale ...
 func (m *QTensorProto) GetScale() float64 {
 	if m != nil {
 		return m.Scale
@@ -327,6 +372,7 @@ func (m *QTensorProto) GetScale() float64 {
 	return 0
 }
 
+// GetBias ...
 func (m *QTensorProto) GetBias() float64 {
 	if m != nil {
 		return m.Bias
@@ -334,6 +380,7 @@ func (m *QTensorProto) GetBias() float64 {
 	return 0
 }
 
+// GetIsSigned ...
 func (m *QTensorProto) GetIsSigned() bool {
 	if m != nil {
 		return m.IsSigned
@@ -341,6 +388,7 @@ func (m *QTensorProto) GetIsSigned() bool {
 	return false
 }
 
+// GetData ...
 func (m *QTensorProto) GetData() []int32 {
 	if m != nil {
 		return m.Data
@@ -348,6 +396,7 @@ func (m *QTensorProto) GetData() []int32 {
 	return nil
 }
 
+// GetName ...
 func (m *QTensorProto) GetName() string {
 	if m != nil {
 		return m.Name
@@ -362,11 +411,16 @@ type TensorProtos struct {
 	Protos []*TensorProto `protobuf:"bytes,1,rep,name=protos" json:"protos,omitempty"`
 }
 
-func (m *TensorProtos) Reset()                    { *m = TensorProtos{} }
-func (m *TensorProtos) String() string            { return proto.CompactTextString(m) }
-func (*TensorProtos) ProtoMessage()               {}
+// Reset ...
+func (m *TensorProtos) Reset()                    { *m = TensorProtos{} }               
+// String ...
+func (m *TensorProtos) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*TensorProtos) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*TensorProtos) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{2} }
 
+// GetProtos ...
 func (m *TensorProtos) GetProtos() []*TensorProto {
 	if m != nil {
 		return m.Protos
@@ -374,6 +428,7 @@ func (m *TensorProtos) GetProtos() []*TensorProto {
 	return nil
 }
 
+// TensorShape ...
 type TensorShape struct {
 	Dims         []int64               `protobuf:"varint,1,rep,name=dims" json:"dims,omitempty"`
 	DataType     *TensorProto_DataType `protobuf:"varint,2,opt,name=data_type,json=dataType,enum=caffe2.TensorProto_DataType,def=1" json:"data_type,omitempty"`
@@ -382,14 +437,21 @@ type TensorShape struct {
 	Name         string                `protobuf:"bytes,5,opt,name=name" json:"name"`
 }
 
-func (m *TensorShape) Reset()                    { *m = TensorShape{} }
-func (m *TensorShape) String() string            { return proto.CompactTextString(m) }
-func (*TensorShape) ProtoMessage()               {}
+// Reset ...
+func (m *TensorShape) Reset()                    { *m = TensorShape{} }                
+// String ...
+func (m *TensorShape) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*TensorShape) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*TensorShape) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{3} }
 
-const Default_TensorShape_DataType TensorProto_DataType = TensorProto_FLOAT
+// Default_TensorShape_DataType ...
+const Default_TensorShape_DataType TensorProto_DataType = TensorProto_FLOAT 
+// Default_TensorShape_UnknownShape ...
 const Default_TensorShape_UnknownShape bool = false
 
+// GetDims ...
 func (m *TensorShape) GetDims() []int64 {
 	if m != nil {
 		return m.Dims
@@ -397,6 +459,7 @@ func (m *TensorShape) GetDims() []int64 {
 	return nil
 }
 
+// GetDataType ...
 func (m *TensorShape) GetDataType() TensorProto_DataType {
 	if m != nil && m.DataType != nil {
 		return *m.DataType
@@ -404,6 +467,7 @@ func (m *TensorShape) GetDataType() TensorProto_DataType {
 	return Default_TensorShape_DataType
 }
 
+// GetUnknownDims ...
 func (m *TensorShape) GetUnknownDims() []int32 {
 	if m != nil {
 		return m.UnknownDims
@@ -411,6 +475,7 @@ func (m *TensorShape) GetUnknownDims() []int32 {
 	return nil
 }
 
+// GetUnknownShape ...
 func (m *TensorShape) GetUnknownShape() bool {
 	if m != nil && m.UnknownShape != nil {
 		return *m.UnknownShape
@@ -418,6 +483,7 @@ func (m *TensorShape) GetUnknownShape() bool {
 	return Default_TensorShape_UnknownShape
 }
 
+// GetName ...
 func (m *TensorShape) GetName() string {
 	if m != nil {
 		return m.Name
@@ -425,15 +491,21 @@ func (m *TensorShape) GetName() string {
 	return ""
 }
 
+// TensorShapes ...
 type TensorShapes struct {
 	Shapes []*TensorShape `protobuf:"bytes,1,rep,name=shapes" json:"shapes,omitempty"`
 }
 
-func (m *TensorShapes) Reset()                    { *m = TensorShapes{} }
-func (m *TensorShapes) String() string            { return proto.CompactTextString(m) }
-func (*TensorShapes) ProtoMessage()               {}
+// Reset ...
+func (m *TensorShapes) Reset()                    { *m = TensorShapes{} }               
+// String ...
+func (m *TensorShapes) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*TensorShapes) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*TensorShapes) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{4} }
 
+// GetShapes ...
 func (m *TensorShapes) GetShapes() []*TensorShape {
 	if m != nil {
 		return m.Shapes
@@ -453,11 +525,16 @@ type Argument struct {
 	Strings [][]byte  `protobuf:"bytes,7,rep,name=strings" json:"strings,omitempty"`
 }
 
-func (m *Argument) Reset()                    { *m = Argument{} }
-func (m *Argument) String() string            { return proto.CompactTextString(m) }
-func (*Argument) ProtoMessage()               {}
+// Reset ...
+func (m *Argument) Reset()                    { *m = Argument{} }                   
+// String ...
+func (m *Argument) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*Argument) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*Argument) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{5} }
 
+// GetName ...
 func (m *Argument) GetName() string {
 	if m != nil {
 		return m.Name
@@ -465,6 +542,7 @@ func (m *Argument) GetName() string {
 	return ""
 }
 
+// GetF ...
 func (m *Argument) GetF() float32 {
 	if m != nil {
 		return m.F
@@ -472,6 +550,7 @@ func (m *Argument) GetF() float32 {
 	return 0
 }
 
+// GetI ...
 func (m *Argument) GetI() int64 {
 	if m != nil {
 		return m.I
@@ -479,6 +558,7 @@ func (m *Argument) GetI() int64 {
 	return 0
 }
 
+// GetS ...
 func (m *Argument) GetS() []byte {
 	if m != nil {
 		return m.S
@@ -486,6 +566,7 @@ func (m *Argument) GetS() []byte {
 	return nil
 }
 
+// GetFloats ...
 func (m *Argument) GetFloats() []float32 {
 	if m != nil {
 		return m.Floats
@@ -493,6 +574,7 @@ func (m *Argument) GetFloats() []float32 {
 	return nil
 }
 
+// GetInts ...
 func (m *Argument) GetInts() []int64 {
 	if m != nil {
 		return m.Ints
@@ -500,6 +582,7 @@ func (m *Argument) GetInts() []int64 {
 	return nil
 }
 
+// GetStrings ...
 func (m *Argument) GetStrings() [][]byte {
 	if m != nil {
 		return m.Strings
@@ -521,13 +604,19 @@ type DeviceOption struct {
 	RandomSeed uint32 `protobuf:"varint,3,opt,name=random_seed,json=randomSeed" json:"random_seed"`
 }
 
-func (m *DeviceOption) Reset()                    { *m = DeviceOption{} }
-func (m *DeviceOption) String() string            { return proto.CompactTextString(m) }
-func (*DeviceOption) ProtoMessage()               {}
+// Reset ...
+func (m *DeviceOption) Reset()                    { *m = DeviceOption{} }               
+// String ...
+func (m *DeviceOption) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*DeviceOption) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*DeviceOption) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{6} }
 
+// Default_DeviceOption_DeviceType ...
 const Default_DeviceOption_DeviceType int32 = 0
 
+// GetDeviceType ...
 func (m *DeviceOption) GetDeviceType() int32 {
 	if m != nil && m.DeviceType != nil {
 		return *m.DeviceType
@@ -535,6 +624,7 @@ func (m *DeviceOption) GetDeviceType() int32 {
 	return Default_DeviceOption_DeviceType
 }
 
+// GetCudaGpuId ...
 func (m *DeviceOption) GetCudaGpuId() int32 {
 	if m != nil {
 		return m.CudaGpuId
@@ -542,6 +632,7 @@ func (m *DeviceOption) GetCudaGpuId() int32 {
 	return 0
 }
 
+// GetRandomSeed ...
 func (m *DeviceOption) GetRandomSeed() uint32 {
 	if m != nil {
 		return m.RandomSeed
@@ -578,13 +669,19 @@ type OperatorDef struct {
 	IsGradientOp *bool `protobuf:"varint,9,opt,name=is_gradient_op,json=isGradientOp,def=0" json:"is_gradient_op,omitempty"`
 }
 
-func (m *OperatorDef) Reset()                    { *m = OperatorDef{} }
-func (m *OperatorDef) String() string            { return proto.CompactTextString(m) }
-func (*OperatorDef) ProtoMessage()               {}
+// Reset ...
+func (m *OperatorDef) Reset()                    { *m = OperatorDef{} }                
+// String ...
+func (m *OperatorDef) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*OperatorDef) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*OperatorDef) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{7} }
 
+// Default_OperatorDef_IsGradientOp ...
 const Default_OperatorDef_IsGradientOp bool = false
 
+// GetInput ...
 func (m *OperatorDef) GetInput() []string {
 	if m != nil {
 		return m.Input
@@ -592,6 +689,7 @@ func (m *OperatorDef) GetInput() []string {
 	return nil
 }
 
+// GetOutput ...
 func (m *OperatorDef) GetOutput() []string {
 	if m != nil {
 		return m.Output
@@ -599,6 +697,7 @@ func (m *OperatorDef) GetOutput() []string {
 	return nil
 }
 
+// GetName ...
 func (m *OperatorDef) GetName() string {
 	if m != nil {
 		return m.Name
@@ -606,6 +705,7 @@ func (m *OperatorDef) GetName() string {
 	return ""
 }
 
+// GetType ...
 func (m *OperatorDef) GetType() string {
 	if m != nil {
 		return m.Type
@@ -613,6 +713,7 @@ func (m *OperatorDef) GetType() string {
 	return ""
 }
 
+// GetArg ...
 func (m *OperatorDef) GetArg() []*Argument {
 	if m != nil {
 		return m.Arg
@@ -620,6 +721,7 @@ func (m *OperatorDef) GetArg() []*Argument {
 	return nil
 }
 
+// GetDeviceOption ...
 func (m *OperatorDef) GetDeviceOption() *DeviceOption {
 	if m != nil {
 		return m.DeviceOption
@@ -627,6 +729,7 @@ func (m *OperatorDef) GetDeviceOption() *DeviceOption {
 	return nil
 }
 
+// GetEngine ...
 func (m *OperatorDef) GetEngine() string {
 	if m != nil {
 		return m.Engine
@@ -634,6 +737,7 @@ func (m *OperatorDef) GetEngine() string {
 	return ""
 }
 
+// GetControlInput ...
 func (m *OperatorDef) GetControlInput() []string {
 	if m != nil {
 		return m.ControlInput
@@ -641,6 +745,7 @@ func (m *OperatorDef) GetControlInput() []string {
 	return nil
 }
 
+// GetIsGradientOp ...
 func (m *OperatorDef) GetIsGradientOp() bool {
 	if m != nil && m.IsGradientOp != nil {
 		return *m.IsGradientOp
@@ -685,11 +790,16 @@ type NetDef struct {
 	ExternalOutput []string `protobuf:"bytes,8,rep,name=external_output,json=externalOutput" json:"external_output,omitempty"`
 }
 
-func (m *NetDef) Reset()                    { *m = NetDef{} }
-func (m *NetDef) String() string            { return proto.CompactTextString(m) }
-func (*NetDef) ProtoMessage()               {}
+// Reset ...
+func (m *NetDef) Reset()                    { *m = NetDef{} }                     
+// String ...
+func (m *NetDef) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*NetDef) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*NetDef) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{8} }
 
+// GetName ...
 func (m *NetDef) GetName() string {
 	if m != nil {
 		return m.Name
@@ -697,6 +807,7 @@ func (m *NetDef) GetName() string {
 	return ""
 }
 
+// GetOp ...
 func (m *NetDef) GetOp() []*OperatorDef {
 	if m != nil {
 		return m.Op
@@ -704,6 +815,7 @@ func (m *NetDef) GetOp() []*OperatorDef {
 	return nil
 }
 
+// GetType ...
 func (m *NetDef) GetType() string {
 	if m != nil {
 		return m.Type
@@ -711,6 +823,7 @@ func (m *NetDef) GetType() string {
 	return ""
 }
 
+// GetNumWorkers ...
 func (m *NetDef) GetNumWorkers() int32 {
 	if m != nil {
 		return m.NumWorkers
@@ -718,6 +831,7 @@ func (m *NetDef) GetNumWorkers() int32 {
 	return 0
 }
 
+// GetDeviceOption ...
 func (m *NetDef) GetDeviceOption() *DeviceOption {
 	if m != nil {
 		return m.DeviceOption
@@ -725,6 +839,7 @@ func (m *NetDef) GetDeviceOption() *DeviceOption {
 	return nil
 }
 
+// GetArg ...
 func (m *NetDef) GetArg() []*Argument {
 	if m != nil {
 		return m.Arg
@@ -732,6 +847,7 @@ func (m *NetDef) GetArg() []*Argument {
 	return nil
 }
 
+// GetExternalInput ...
 func (m *NetDef) GetExternalInput() []string {
 	if m != nil {
 		return m.ExternalInput
@@ -739,6 +855,7 @@ func (m *NetDef) GetExternalInput() []string {
 	return nil
 }
 
+// GetExternalOutput ...
 func (m *NetDef) GetExternalOutput() []string {
 	if m != nil {
 		return m.ExternalOutput
@@ -801,11 +918,16 @@ type ExecutionStep struct {
 	OnlyOnce bool `protobuf:"varint,10,opt,name=only_once,json=onlyOnce" json:"only_once"`
 }
 
-func (m *ExecutionStep) Reset()                    { *m = ExecutionStep{} }
-func (m *ExecutionStep) String() string            { return proto.CompactTextString(m) }
-func (*ExecutionStep) ProtoMessage()               {}
+// Reset ...
+func (m *ExecutionStep) Reset()                    { *m = ExecutionStep{} }              
+// String ...
+func (m *ExecutionStep) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*ExecutionStep) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*ExecutionStep) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{9} }
 
+// GetName ...
 func (m *ExecutionStep) GetName() string {
 	if m != nil {
 		return m.Name
@@ -813,6 +935,7 @@ func (m *ExecutionStep) GetName() string {
 	return ""
 }
 
+// GetSubstep ...
 func (m *ExecutionStep) GetSubstep() []*ExecutionStep {
 	if m != nil {
 		return m.Substep
@@ -820,6 +943,7 @@ func (m *ExecutionStep) GetSubstep() []*ExecutionStep {
 	return nil
 }
 
+// GetNetwork ...
 func (m *ExecutionStep) GetNetwork() []string {
 	if m != nil {
 		return m.Network
@@ -827,6 +951,7 @@ func (m *ExecutionStep) GetNetwork() []string {
 	return nil
 }
 
+// GetNumIter ...
 func (m *ExecutionStep) GetNumIter() int64 {
 	if m != nil {
 		return m.NumIter
@@ -834,6 +959,7 @@ func (m *ExecutionStep) GetNumIter() int64 {
 	return 0
 }
 
+// GetCriteriaNetwork ...
 func (m *ExecutionStep) GetCriteriaNetwork() string {
 	if m != nil {
 		return m.CriteriaNetwork
@@ -841,6 +967,7 @@ func (m *ExecutionStep) GetCriteriaNetwork() string {
 	return ""
 }
 
+// GetReportNet ...
 func (m *ExecutionStep) GetReportNet() string {
 	if m != nil {
 		return m.ReportNet
@@ -848,6 +975,7 @@ func (m *ExecutionStep) GetReportNet() string {
 	return ""
 }
 
+// GetReportInterval ...
 func (m *ExecutionStep) GetReportInterval() int32 {
 	if m != nil {
 		return m.ReportInterval
@@ -855,6 +983,7 @@ func (m *ExecutionStep) GetReportInterval() int32 {
 	return 0
 }
 
+// GetRunEveryMs ...
 func (m *ExecutionStep) GetRunEveryMs() int64 {
 	if m != nil {
 		return m.RunEveryMs
@@ -862,6 +991,7 @@ func (m *ExecutionStep) GetRunEveryMs() int64 {
 	return 0
 }
 
+// GetConcurrentSubsteps ...
 func (m *ExecutionStep) GetConcurrentSubsteps() bool {
 	if m != nil {
 		return m.ConcurrentSubsteps
@@ -869,6 +999,7 @@ func (m *ExecutionStep) GetConcurrentSubsteps() bool {
 	return false
 }
 
+// GetShouldStopBlob ...
 func (m *ExecutionStep) GetShouldStopBlob() string {
 	if m != nil {
 		return m.ShouldStopBlob
@@ -876,6 +1007,7 @@ func (m *ExecutionStep) GetShouldStopBlob() string {
 	return ""
 }
 
+// GetOnlyOnce ...
 func (m *ExecutionStep) GetOnlyOnce() bool {
 	if m != nil {
 		return m.OnlyOnce
@@ -883,6 +1015,7 @@ func (m *ExecutionStep) GetOnlyOnce() bool {
 	return false
 }
 
+// PlanDef ...
 type PlanDef struct {
 	// All the networks that are used in this execution. Note that networks should
 	// be ordered in the way they are executed, i.e. for a layer in a network, all
@@ -894,11 +1027,16 @@ type PlanDef struct {
 	ExecutionStep []*ExecutionStep `protobuf:"bytes,3,rep,name=execution_step,json=executionStep" json:"execution_step,omitempty"`
 }
 
-func (m *PlanDef) Reset()                    { *m = PlanDef{} }
-func (m *PlanDef) String() string            { return proto.CompactTextString(m) }
-func (*PlanDef) ProtoMessage()               {}
+// Reset ...
+func (m *PlanDef) Reset()                    { *m = PlanDef{} }                    
+// String ...
+func (m *PlanDef) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*PlanDef) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*PlanDef) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{10} }
 
+// GetName ...
 func (m *PlanDef) GetName() string {
 	if m != nil {
 		return m.Name
@@ -906,6 +1044,7 @@ func (m *PlanDef) GetName() string {
 	return ""
 }
 
+// GetNetwork ...
 func (m *PlanDef) GetNetwork() []*NetDef {
 	if m != nil {
 		return m.Network
@@ -913,6 +1052,7 @@ func (m *PlanDef) GetNetwork() []*NetDef {
 	return nil
 }
 
+// GetExecutionStep ...
 func (m *PlanDef) GetExecutionStep() []*ExecutionStep {
 	if m != nil {
 		return m.ExecutionStep
@@ -931,11 +1071,16 @@ type BlobProto struct {
 	Qtensor *QTensorProto `protobuf:"bytes,5,opt,name=qtensor" json:"qtensor,omitempty"`
 }
 
-func (m *BlobProto) Reset()                    { *m = BlobProto{} }
-func (m *BlobProto) String() string            { return proto.CompactTextString(m) }
-func (*BlobProto) ProtoMessage()               {}
+// Reset ...
+func (m *BlobProto) Reset()                    { *m = BlobProto{} }                  
+// String ...
+func (m *BlobProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*BlobProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*BlobProto) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{11} }
 
+// GetName ...
 func (m *BlobProto) GetName() string {
 	if m != nil {
 		return m.Name
@@ -943,6 +1088,7 @@ func (m *BlobProto) GetName() string {
 	return ""
 }
 
+// GetType ...
 func (m *BlobProto) GetType() string {
 	if m != nil {
 		return m.Type
@@ -950,6 +1096,7 @@ func (m *BlobProto) GetType() string {
 	return ""
 }
 
+// GetTensor ...
 func (m *BlobProto) GetTensor() *TensorProto {
 	if m != nil {
 		return m.Tensor
@@ -957,6 +1104,7 @@ func (m *BlobProto) GetTensor() *TensorProto {
 	return nil
 }
 
+// GetContent ...
 func (m *BlobProto) GetContent() []byte {
 	if m != nil {
 		return m.Content
@@ -964,6 +1112,7 @@ func (m *BlobProto) GetContent() []byte {
 	return nil
 }
 
+// GetQtensor ...
 func (m *BlobProto) GetQtensor() *QTensorProto {
 	if m != nil {
 		return m.Qtensor
@@ -983,11 +1132,16 @@ type DBReaderProto struct {
 	Key string `protobuf:"bytes,4,opt,name=key" json:"key"`
 }
 
-func (m *DBReaderProto) Reset()                    { *m = DBReaderProto{} }
-func (m *DBReaderProto) String() string            { return proto.CompactTextString(m) }
-func (*DBReaderProto) ProtoMessage()               {}
+// Reset ...
+func (m *DBReaderProto) Reset()                    { *m = DBReaderProto{} }              
+// String ...
+func (m *DBReaderProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*DBReaderProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*DBReaderProto) Descriptor() ([]byte, []int) { return fileDescriptorCaffe2, []int{12} }
 
+// GetName ...
 func (m *DBReaderProto) GetName() string {
 	if m != nil {
 		return m.Name
@@ -995,6 +1149,7 @@ func (m *DBReaderProto) GetName() string {
 	return ""
 }
 
+// GetSource ...
 func (m *DBReaderProto) GetSource() string {
 	if m != nil {
 		return m.Source
@@ -1002,6 +1157,7 @@ func (m *DBReaderProto) GetSource() string {
 	return ""
 }
 
+// GetDbType ...
 func (m *DBReaderProto) GetDbType() string {
 	if m != nil {
 		return m.DbType
@@ -1009,6 +1165,7 @@ func (m *DBReaderProto) GetDbType() string {
 	return ""
 }
 
+// GetKey ...
 func (m *DBReaderProto) GetKey() string {
 	if m != nil {
 		return m.Key
@@ -1033,7 +1190,8 @@ func init() {
 	proto.RegisterType((*DBReaderProto)(nil), "caffe2.DBReaderProto")
 	proto.RegisterEnum("caffe2.DeviceType", DeviceType_name, DeviceType_value)
 	proto.RegisterEnum("caffe2.TensorProto_DataType", TensorProto_DataType_name, TensorProto_DataType_value)
-}
+} 
+// Marshal ...
 func (m *TensorProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1044,6 +1202,7 @@ func (m *TensorProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *TensorProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1178,6 +1337,7 @@ func (m *TensorProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *TensorProto_Segment) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1188,6 +1348,7 @@ func (m *TensorProto_Segment) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *TensorProto_Segment) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1202,6 +1363,7 @@ func (m *TensorProto_Segment) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *QTensorProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1212,6 +1374,7 @@ func (m *QTensorProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *QTensorProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1266,6 +1429,7 @@ func (m *QTensorProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *TensorProtos) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1276,6 +1440,7 @@ func (m *TensorProtos) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *TensorProtos) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1296,6 +1461,7 @@ func (m *TensorProtos) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *TensorShape) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1306,6 +1472,7 @@ func (m *TensorShape) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *TensorShape) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1347,6 +1514,7 @@ func (m *TensorShape) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *TensorShapes) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1357,6 +1525,7 @@ func (m *TensorShapes) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *TensorShapes) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1377,6 +1546,7 @@ func (m *TensorShapes) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *Argument) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1387,6 +1557,7 @@ func (m *Argument) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *Argument) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1441,6 +1612,7 @@ func (m *Argument) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *DeviceOption) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1451,6 +1623,7 @@ func (m *DeviceOption) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *DeviceOption) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1470,6 +1643,7 @@ func (m *DeviceOption) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *OperatorDef) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1480,6 +1654,7 @@ func (m *OperatorDef) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *OperatorDef) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1577,6 +1752,7 @@ func (m *OperatorDef) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *NetDef) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1587,6 +1763,7 @@ func (m *NetDef) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *NetDef) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1670,6 +1847,7 @@ func (m *NetDef) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *ExecutionStep) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1680,6 +1858,7 @@ func (m *ExecutionStep) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *ExecutionStep) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1756,6 +1935,7 @@ func (m *ExecutionStep) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *PlanDef) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1766,6 +1946,7 @@ func (m *PlanDef) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *PlanDef) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1802,6 +1983,7 @@ func (m *PlanDef) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *BlobProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1812,6 +1994,7 @@ func (m *BlobProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *BlobProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1854,6 +2037,7 @@ func (m *BlobProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *DBReaderProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -1864,6 +2048,7 @@ func (m *DBReaderProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *DBReaderProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -1914,7 +2099,8 @@ func encodeVarintCaffe2(dAtA []byte, offset int, v uint64) int {
 	}
 	dAtA[offset] = uint8(v)
 	return offset + 1
-}
+} 
+// Size ...
 func (m *TensorProto) Size() (n int) {
 	var l int
 	_ = l
@@ -1969,6 +2155,7 @@ func (m *TensorProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *TensorProto_Segment) Size() (n int) {
 	var l int
 	_ = l
@@ -1977,6 +2164,7 @@ func (m *TensorProto_Segment) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *QTensorProto) Size() (n int) {
 	var l int
 	_ = l
@@ -2001,6 +2189,7 @@ func (m *QTensorProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *TensorProtos) Size() (n int) {
 	var l int
 	_ = l
@@ -2013,6 +2202,7 @@ func (m *TensorProtos) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *TensorShape) Size() (n int) {
 	var l int
 	_ = l
@@ -2037,6 +2227,7 @@ func (m *TensorShape) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *TensorShapes) Size() (n int) {
 	var l int
 	_ = l
@@ -2049,6 +2240,7 @@ func (m *TensorShapes) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *Argument) Size() (n int) {
 	var l int
 	_ = l
@@ -2077,6 +2269,7 @@ func (m *Argument) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *DeviceOption) Size() (n int) {
 	var l int
 	_ = l
@@ -2088,6 +2281,7 @@ func (m *DeviceOption) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *OperatorDef) Size() (n int) {
 	var l int
 	_ = l
@@ -2131,6 +2325,7 @@ func (m *OperatorDef) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *NetDef) Size() (n int) {
 	var l int
 	_ = l
@@ -2170,6 +2365,7 @@ func (m *NetDef) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *ExecutionStep) Size() (n int) {
 	var l int
 	_ = l
@@ -2201,6 +2397,7 @@ func (m *ExecutionStep) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *PlanDef) Size() (n int) {
 	var l int
 	_ = l
@@ -2221,6 +2418,7 @@ func (m *PlanDef) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *BlobProto) Size() (n int) {
 	var l int
 	_ = l
@@ -2243,6 +2441,7 @@ func (m *BlobProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *DBReaderProto) Size() (n int) {
 	var l int
 	_ = l
@@ -2269,7 +2468,8 @@ func sovCaffe2(x uint64) (n int) {
 }
 func sozCaffe2(x uint64) (n int) {
 	return sovCaffe2(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
+} 
+// Unmarshal ...
 func (m *TensorProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -2792,7 +2992,8 @@ func (m *TensorProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *TensorProto_Segment) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -2889,7 +3090,8 @@ func (m *TensorProto_Segment) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *QTensorProto) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -3184,7 +3386,8 @@ func (m *QTensorProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *TensorProtos) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3265,7 +3468,8 @@ func (m *TensorProtos) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *TensorShape) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3509,7 +3713,8 @@ func (m *TensorShape) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *TensorShapes) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3590,7 +3795,8 @@ func (m *TensorShapes) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *Argument) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3876,7 +4082,8 @@ func (m *Argument) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *DeviceOption) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -3984,7 +4191,8 @@ func (m *DeviceOption) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *OperatorDef) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -4293,7 +4501,8 @@ func (m *OperatorDef) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *NetDef) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -4573,7 +4782,8 @@ func (m *NetDef) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *ExecutionStep) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -4896,7 +5106,8 @@ func (m *ExecutionStep) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *PlanDef) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -5037,7 +5248,8 @@ func (m *PlanDef) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *BlobProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -5242,7 +5454,8 @@ func (m *BlobProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *DBReaderProto) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -5509,6 +5722,7 @@ func skipCaffe2(dAtA []byte) (n int, err error) {
 	panic("unreachable")
 }
 
+// ErrInvalidLengthCaffe2 ...
 var (
 	ErrInvalidLengthCaffe2 = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowCaffe2   = fmt.Errorf("proto: integer overflow")

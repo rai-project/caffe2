@@ -26,11 +26,16 @@ type ProfDAGProto struct {
 	Stddev float32 `protobuf:"fixed32,3,req,name=stddev" json:"stddev"`
 }
 
-func (m *ProfDAGProto) Reset()                    { *m = ProfDAGProto{} }
-func (m *ProfDAGProto) String() string            { return proto.CompactTextString(m) }
-func (*ProfDAGProto) ProtoMessage()               {}
+// Reset ...
+func (m *ProfDAGProto) Reset()                    { *m = ProfDAGProto{} }               
+// String ...
+func (m *ProfDAGProto) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*ProfDAGProto) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*ProfDAGProto) Descriptor() ([]byte, []int) { return fileDescriptorProfDag, []int{0} }
 
+// GetName ...
 func (m *ProfDAGProto) GetName() string {
 	if m != nil {
 		return m.Name
@@ -38,6 +43,7 @@ func (m *ProfDAGProto) GetName() string {
 	return ""
 }
 
+// GetMean ...
 func (m *ProfDAGProto) GetMean() float32 {
 	if m != nil {
 		return m.Mean
@@ -45,6 +51,7 @@ func (m *ProfDAGProto) GetMean() float32 {
 	return 0
 }
 
+// GetStddev ...
 func (m *ProfDAGProto) GetStddev() float32 {
 	if m != nil {
 		return m.Stddev
@@ -52,15 +59,21 @@ func (m *ProfDAGProto) GetStddev() float32 {
 	return 0
 }
 
+// ProfDAGProtos ...
 type ProfDAGProtos struct {
 	Stats []*ProfDAGProto `protobuf:"bytes,1,rep,name=stats" json:"stats,omitempty"`
 }
 
-func (m *ProfDAGProtos) Reset()                    { *m = ProfDAGProtos{} }
-func (m *ProfDAGProtos) String() string            { return proto.CompactTextString(m) }
-func (*ProfDAGProtos) ProtoMessage()               {}
+// Reset ...
+func (m *ProfDAGProtos) Reset()                    { *m = ProfDAGProtos{} }              
+// String ...
+func (m *ProfDAGProtos) String() string            { return proto.CompactTextString(m) } 
+// ProtoMessage ...
+func (*ProfDAGProtos) ProtoMessage()               {}                                    
+// Descriptor ...
 func (*ProfDAGProtos) Descriptor() ([]byte, []int) { return fileDescriptorProfDag, []int{1} }
 
+// GetStats ...
 func (m *ProfDAGProtos) GetStats() []*ProfDAGProto {
 	if m != nil {
 		return m.Stats
@@ -71,7 +84,8 @@ func (m *ProfDAGProtos) GetStats() []*ProfDAGProto {
 func init() {
 	proto.RegisterType((*ProfDAGProto)(nil), "caffe2.ProfDAGProto")
 	proto.RegisterType((*ProfDAGProtos)(nil), "caffe2.ProfDAGProtos")
-}
+} 
+// Marshal ...
 func (m *ProfDAGProto) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -82,6 +96,7 @@ func (m *ProfDAGProto) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *ProfDAGProto) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -100,6 +115,7 @@ func (m *ProfDAGProto) MarshalTo(dAtA []byte) (int, error) {
 	return i, nil
 }
 
+// Marshal ...
 func (m *ProfDAGProtos) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
@@ -110,6 +126,7 @@ func (m *ProfDAGProtos) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
+// MarshalTo ...
 func (m *ProfDAGProtos) MarshalTo(dAtA []byte) (int, error) {
 	var i int
 	_ = i
@@ -156,7 +173,8 @@ func encodeVarintProfDag(dAtA []byte, offset int, v uint64) int {
 	}
 	dAtA[offset] = uint8(v)
 	return offset + 1
-}
+} 
+// Size ...
 func (m *ProfDAGProto) Size() (n int) {
 	var l int
 	_ = l
@@ -167,6 +185,7 @@ func (m *ProfDAGProto) Size() (n int) {
 	return n
 }
 
+// Size ...
 func (m *ProfDAGProtos) Size() (n int) {
 	var l int
 	_ = l
@@ -191,7 +210,8 @@ func sovProfDag(x uint64) (n int) {
 }
 func sozProfDag(x uint64) (n int) {
 	return sovProfDag(uint64((x << 1) ^ uint64((int64(x) >> 63))))
-}
+} 
+// Unmarshal ...
 func (m *ProfDAGProto) Unmarshal(dAtA []byte) error {
 	var hasFields [1]uint64
 	l := len(dAtA)
@@ -311,7 +331,8 @@ func (m *ProfDAGProto) Unmarshal(dAtA []byte) error {
 		return io.ErrUnexpectedEOF
 	}
 	return nil
-}
+} 
+// Unmarshal ...
 func (m *ProfDAGProtos) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
@@ -493,6 +514,7 @@ func skipProfDag(dAtA []byte) (n int, err error) {
 	panic("unreachable")
 }
 
+// ErrInvalidLengthProfDag ...
 var (
 	ErrInvalidLengthProfDag = fmt.Errorf("proto: negative length found during unmarshaling")
 	ErrIntOverflowProfDag   = fmt.Errorf("proto: integer overflow")

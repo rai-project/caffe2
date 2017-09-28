@@ -8,6 +8,7 @@ import (
 	"github.com/rai-project/dlframework/framework"
 )
 
+// FrameworkManifest ...
 var FrameworkManifest = dlframework.FrameworkManifest{
 	Name:    "Caffe2",
 	Version: "0.8.1",
