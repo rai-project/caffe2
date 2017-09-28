@@ -13,7 +13,6 @@ import:
   version: ~0.8.0
 - package: github.com/rai-project/config
 - package: github.com/rai-project/dlframework
-  version: ~0.2.18
   subpackages:
   - framework
   - framework/agent
@@ -30,7 +29,7 @@ import:
   subpackages:
   - ctimer
 - package: github.com/sirupsen/logrus
-  version: ~1.0.3
+  version: ^1.0.0
 - package: golang.org/x/net
   subpackages:
   - context
