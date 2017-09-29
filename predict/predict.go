@@ -17,6 +17,7 @@ import (
 	common "github.com/rai-project/dlframework/framework/predict"
 	"github.com/rai-project/downloadmanager"
 	gocaffe2 "github.com/rai-project/go-caffe2"
+	"github.com/rai-project/image"
 	"github.com/rai-project/image/types"
 	"github.com/rai-project/tracer/ctimer"
 )
@@ -108,6 +109,7 @@ func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.Prepr
 		Scale:     scale,
 		Size:      []int{int(imageDims[1]), int(imageDims[2])},
 		ColorMode: types.BGRMode,
+		Layout:    image.CHWLayout,
 	}, nil
 }
 
