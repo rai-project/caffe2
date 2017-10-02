@@ -1,0 +1,55 @@
+name: Inception # name of your model
+framework:
+  name: Caffe2 # framework for the model
+  version: 0.8.1 # framework version contraint
+version: 4.0 # version information in semantic version format
+container: # containers used to perform model prediction
+           # multiple platforms can be specified
+  amd64:
+    gpu: raiproject/carml-caffe:amd64-cpu
+    cpu: raiproject/carml-caffe:amd64-gpu
+  ppc64le:
+    cpu: raiproject/carml-caffe:ppc64le-gpu
+    gpu: raiproject/carml-caffe:ppc64le-gpu
+description: >
+  TODO
+references: # references to papers / websites / etc.. describing the model
+  - https://github.com/soeaver/caffe-model/tree/master/cls
+  - https://arxiv.org/abs/1602.07261
+  - https://github.com/tensorflow/models/blob/master/research/slim/nets/inception_v4.py
+  - https://github.com/tensorflow/models/blob/master/research/slim/preprocessing/inception_preprocessing.py
+  - https://github.com/kentsommer/keras-inceptionV4/issues/5
+# license of the model
+license: unrestricted
+# inputs to the model
+inputs:
+  # first input type for the model
+  - type: image
+    # description of the first input
+    description: the input image
+    parameters: # type parameters
+      dimensions: [3, 299, 299]
+      mean: [128, 128, 128]
+      scale: 128
+output:
+  # the type of the output
+  type: feature
+  # a description of the output parameter
+  description: the output label
+  parameters:
+    # type parameters
+    features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
+    features_checksum: 4d234b5833aca44928065a180db3016a
+model: # specifies model graph and weights resources
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inception-v4
+  graph_path: predict_net.pb
+  weights_path: init_net.pb
+  is_archive: false # if set, then the base_url is a url to an archive
+                    # the graph_path and weights_path then denote the
+                    # file names of the graph and weights within the archive
+  graph_checksum: b6590543b274031ccdbad7255ec026ef
+  weights_checksum: 7796e0c6742449e5117e57b69256453d
+attributes: # extra network attributes
+  kind: CNN # the kind of neural network (CNN, RNN, ...)
+  training_dataset: ImageNet # dataset used to for training
+  manifest_author: abduld

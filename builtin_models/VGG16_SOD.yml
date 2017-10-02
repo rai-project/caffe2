@@ -1,0 +1,54 @@
+name: VGG16_SOD # name of your model
+framework:
+  name: Caffe2 # framework for the model
+  version: 0.8.1 # framework version contraint
+version: 1.0 # version information in semantic version format
+container: # containers used to perform model prediction
+           # multiple platforms can be specified
+  amd64:
+    gpu: raiproject/carml-caffe:amd64-cpu
+    cpu: raiproject/carml-caffe:amd64-gpu
+  ppc64le:
+    cpu: raiproject/carml-caffe:ppc64le-gpu
+    gpu: raiproject/carml-caffe:ppc64le-gpu
+description: >
+  TODO
+references: # references to papers / websites / etc.. describing the model
+  - https://gist.github.com/jimmie33/509111f8a00a9ece2c3d5dde6a750129
+  - https://github.com/jimmie33/SOD
+  - https://github.com/BVLC/caffe/wiki/Model-Zoo
+  - http://cs-people.bu.edu/jmzhang/sod.html
+  - https://arxiv.org/abs/1409.1556
+# license of the model
+license: MIT
+# inputs to the model
+inputs:
+  # first input type for the model
+  - type: image
+    # description of the first input
+    description: the input image
+    parameters: # type parameters
+      dimensions: [3, 224, 224]
+      mean: [123.68, 116.779, 103.939]
+output:
+  # the type of the output
+  type: feature
+  # a description of the output parameter
+  description: the output label
+  parameters:
+    # type parameters
+    features_url: http://s3.amazonaws.com/store.carml.org/models/caffe/vgg16_sod/center100.txt
+    features_checksum: 6ea7d1bd9a24ba3bcde6c067dbd6185f
+model: # specifies model graph and weights resources
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inception-v4/
+  graph_path: predict_net.pb
+  weights_path: init_net.pb
+  is_archive: false # if set, then the base_url is a url to an archive
+                    # the graph_path and weights_path then denote the
+                    # file names of the graph and weights within the archive
+  graph_checksum: 38a8c0e9b54834ff3980bb6063823f72
+  weights_checksum: dd0e1a8721036933ea7c9626d028b97b
+attributes: # extra network attributes
+  kind: CNN # the kind of neural network (CNN, RNN, ...)
+  training_dataset: The MSO dataset # dataset used to for training
+  manifest_author: abduld

@@ -1,0 +1,52 @@
+name: InceptionBN-21K # name of your model
+framework:
+  name: Caffe2 # framework for the model
+  version: 0.8.1 # framework version contraint
+version: 2.0 # version information in semantic version format
+container: # containers used to perform model prediction
+           # multiple platforms can be specified
+  amd64:
+    gpu: raiproject/carml-caffe:amd64-cpu
+    cpu: raiproject/carml-caffe:amd64-gpu
+  ppc64le:
+    cpu: raiproject/carml-caffe:ppc64le-gpu
+    gpu: raiproject/carml-caffe:ppc64le-gpu
+description: >
+  TODO
+references: # references to papers / websites / etc.. describing the model
+  - https://github.com/pertusa/InceptionBN-21K-for-Caffe
+  - https://github.com/BVLC/caffe/wiki/Model-Zoo
+  - https://github.com/dmlc/mxnet-model-gallery/blob/master/imagenet-21k-inception.md
+# license of the model
+license: unrestricted
+# inputs to the model
+inputs:
+  # first input type for the model
+  - type: image
+    # description of the first input
+    description: the input image
+    parameters: # type parameters
+      dimensions: [3, 224, 224]
+      mean: [117, 117, 117]
+output:
+  # the type of the output
+  type: feature
+  # a description of the output parameter
+  description: the output label
+  parameters:
+    # type parameters
+    features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset-21k.txt
+    features_checksum: 851bbe06499cf53fa6f8fb72ad61e906
+model: # specifies model graph and weights resources
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/InceptionBN-21K
+  graph_path: predict_net.pb
+  weights_path: init_net.pb
+  is_archive: false # if set, then the base_url is a url to an archive
+                    # the graph_path and weights_path then denote the
+                    # file names of the graph and weights within the archive
+  graph_checksum: e2fc95d726d9f0f969af7f9a6c06fef7
+  weights_checksum: 73a69d8de57baa18c3d3bd27f4bc9d22
+attributes: # extra network attributes
+  kind: CNN # the kind of neural network (CNN, RNN, ...)
+  training_dataset: ImageNet # dataset used to for training
+  manifest_author: abduld
