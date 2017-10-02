@@ -210,7 +210,7 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 		olog.String("event", "creating predictor"),
 	)
 
-	pred, err := gocaffe2.New(p.GetGraphPath(), p.GetWeightsPath())
+	pred, err := gocaffe2.New(p.GetGraphPath(), p.GetWeightsPath(), gocaffe2.CUDADevice)
 	if err != nil {
 		return err
 	}
