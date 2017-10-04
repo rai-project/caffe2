@@ -229,6 +229,8 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 
 // Predict ...
 func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...options.Option) ([]dlframework.Features, error) {
+	span := opentracing.SpanFromContext(ctx)
+	_ = span
 
 	if err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
 		defer func() {
