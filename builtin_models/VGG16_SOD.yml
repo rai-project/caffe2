@@ -40,7 +40,7 @@ output:
     features_url: http://s3.amazonaws.com/store.carml.org/models/caffe/vgg16_sod/center100.txt
     features_checksum: 6ea7d1bd9a24ba3bcde6c067dbd6185f
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inception-v4/
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/vgg16_sod/
   graph_path: predict_net.pb
   weights_path: init_net.pb
   is_archive: false # if set, then the base_url is a url to an archive

@@ -14,6 +14,7 @@ import (
 	"github.com/rai-project/config"
 	"github.com/rai-project/dlframework"
 	"github.com/rai-project/dlframework/framework/agent"
+	"github.com/rai-project/dlframework/framework/options"
 	common "github.com/rai-project/dlframework/framework/predict"
 	"github.com/rai-project/downloadmanager"
 	gocaffe2 "github.com/rai-project/go-caffe2"
@@ -31,7 +32,7 @@ type ImagePredictor struct {
 }
 
 // New ...
-func New(model dlframework.ModelManifest, opts dlframework.PredictionOptions) (common.Predictor, error) {
+func New(model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	modelInputs := model.GetInputs()
 	if len(modelInputs) != 1 {
 		return nil, errors.New("number of inputs not supported")
@@ -44,11 +45,11 @@ func New(model dlframework.ModelManifest, opts dlframework.PredictionOptions) (c
 
 	predictor := new(ImagePredictor)
 
-	return predictor.Load(context.Background(), model, opts)
+	return predictor.Load(context.Background(), model, opts...)
 }
 
 // Load ...
-func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts dlframework.PredictionOptions) (common.Predictor, error) {
+func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
 	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Load"); span != nil {
 		ctx = newCtx
 		defer span.Finish()
@@ -67,10 +68,9 @@ func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManife
 	ip := &ImagePredictor{
 		ImagePredictor: common.ImagePredictor{
 			Base: common.Base{
-				Framework:         framework,
-				Model:             model,
-				PredictionOptions: opts,
-				Tracer:            tracer,
+				Framework: framework,
+				Model:     model,
+				Options:   options.New(opts...),
 			},
 			WorkDir: workDir,
 		},
@@ -114,7 +114,7 @@ func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.Prepr
 }
 
 func (p *ImagePredictor) download(ctx context.Context) error {
-	span, ctx := p.GetTracer().StartSpanFromContext(
+	span, ctx := opentracing.StartSpanFromContext(
 		ctx,
 		"Download",
 		opentracing.Tags{
@@ -180,8 +180,7 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 }
 
 func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
-	span, ctx := p.GetTracer().StartSpanFromContext(ctx, "LoadPredictor")
-
+	span, ctx := opentracing.StartSpanFromContext(ctx, "LoadPredictor")
 	defer span.Finish()
 
 	span.LogFields(
@@ -210,7 +209,16 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 		olog.String("event", "creating predictor"),
 	)
 
-	pred, err := gocaffe2.New(p.GetGraphPath(), p.GetWeightsPath(), gocaffe2.CUDADevice)
+	opts, err := p.GetPredictionOptions(ctx)
+	if err != nil {
+		return err
+	}
+
+	pred, err := gocaffe2.New(
+		options.WithOptions(opts),
+		options.Graph([]byte(p.GetGraphPath())),
+		options.Weights([]byte(p.GetWeightsPath())),
+	)
 	if err != nil {
 		return err
 	}
@@ -220,14 +228,7 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 }
 
 // Predict ...
-func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts dlframework.PredictionOptions) ([]dlframework.Features, error) {
-	span, ctx := p.GetTracer().StartSpanFromContext(ctx, "Predict", opentracing.Tags{
-		"model_name":        p.Model.GetName(),
-		"model_version":     p.Model.GetVersion(),
-		"framework_name":    p.Model.GetFramework().GetName(),
-		"framework_version": p.Model.GetFramework().GetVersion(),
-		"batch_size":        p.BatchSize(),
-	})
+func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...options.Option) ([]dlframework.Features, error) {
 
 	if err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
 		defer func() {
@@ -237,13 +238,11 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts dlf
 				return
 			}
 			if t, err := ctimer.New(profBuffer); err == nil {
-				t.Publish(ctx, p.GetTracer())
+				t.Publish(ctx)
 			}
 			p.predictor.DisableProfiling()
 		}()
 	}
-
-	defer span.Finish()
 
 	var input []float32
 	for _, v := range data {
@@ -255,11 +254,11 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts dlf
 		return nil, err
 	}
 
+	options := options.New(opts...)
+
 	var output []dlframework.Features
-	batchSize := int(p.BatchSize())
-	if batchSize == 0 {
-		batchSize = 1
-	}
+	batchSize := int(options.BatchSize())
+
 	length := len(predictions) / batchSize
 	for i := 0; i < batchSize; i++ {
 		rprobs := make([]*dlframework.Feature, length)
