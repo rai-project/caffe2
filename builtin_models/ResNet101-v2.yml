@@ -17,6 +17,7 @@ references: # references to papers / websites / etc.. describing the model
   - https://github.com/soeaver/caffe-model/tree/master/cls
   - https://github.com/craftGBD/craftGBD
   - https://arxiv.org/abs/1512.03385
+  - https://github.com/leonardvandriel/caffe2_models
 # license of the model
 license: unrestricted
 # inputs to the model

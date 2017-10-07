@@ -45,8 +45,8 @@ model: # specifies model graph and weights resources
   is_archive: false # if set, then the base_url is a url to an archive
                     # the graph_path and weights_path then denote the
                     # file names of the graph and weights within the archive
-  graph_checksum: d3dd852984f0f2fac55d0dafd14e771f
-  weights_checksum: 856f866e4b5374a1c644c01d9ebcfcc4
+  graph_checksum: c9c8593323a4fed955fd03bf4bdac242
+  weights_checksum: 4cfd2b7e599bfda6e0b5f8cb24cc639e
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training
