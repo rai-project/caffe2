@@ -38,14 +38,14 @@ output:
     features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset-21k.txt
     features_checksum: 851bbe06499cf53fa6f8fb72ad61e906
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/InceptionBN-21K
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inceptionbn-21k
   graph_path: predict_net.pb
   weights_path: init_net.pb
   is_archive: false # if set, then the base_url is a url to an archive
                     # the graph_path and weights_path then denote the
                     # file names of the graph and weights within the archive
-  graph_checksum: e2fc95d726d9f0f969af7f9a6c06fef7
-  weights_checksum: 73a69d8de57baa18c3d3bd27f4bc9d22
+  graph_checksum: 3e6ff39fcd75caaf20644bb1fde80811
+  weights_checksum: a91e384bb76117832f3bd3058142080a
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training
