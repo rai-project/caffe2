@@ -14,7 +14,7 @@ container: # containers used to perform model prediction
 description: >
   The model is an improved version of the 19-layer model used by the VGG team in the ILSVRC-2014 competition.
 references: # references to papers / websites / etc.. describing the model
-  - https://gist.github.com/ksimonyan/3785162f95cd2d5fee77
+  - https://github.com/leonardvandriel/caffe2_models
   - https://github.com/BVLC/caffe/wiki/Model-Zoo#models-used-by-the-vgg-team-in-ilsvrc-2014
   - https://arxiv.org/abs/1409.1556
 # license of the model
@@ -38,8 +38,9 @@ output:
     features_url: http://data.dmlc.ml/mxnet/models/imagenet/synset.txt
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
-  graph_path: https://gist.githubusercontent.com/ksimonyan/3785162f95cd2d5fee77/raw/f43eeefc869d646b449aa6ce66f87bf987a1c9b5/VGG_ILSVRC_19_layers_deploy.prototxt
-  weights_path: http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_19_layers.caffemodel
+  base_url: http://s3.amazonaws.com/store.carml.org/models/caffe2/vgg19
+  graph_path: vgg19_init_net.pb
+  weights_path: vgg19_predict_net.pb
   is_archive: false # if set, then the base_url is a url to an archive
                     # the graph_path and weights_path then denote the
                     # file names of the graph and weights within the archive
