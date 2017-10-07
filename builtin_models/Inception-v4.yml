@@ -19,6 +19,7 @@ references: # references to papers / websites / etc.. describing the model
   - https://github.com/tensorflow/models/blob/master/research/slim/nets/inception_v4.py
   - https://github.com/tensorflow/models/blob/master/research/slim/preprocessing/inception_preprocessing.py
   - https://github.com/kentsommer/keras-inceptionV4/issues/5
+  - https://github.com/leonardvandriel/caffe2_models
 # license of the model
 license: unrestricted
 # inputs to the model
