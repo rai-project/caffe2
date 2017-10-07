@@ -39,8 +39,8 @@ output:
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
   base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnet152
-  graph_path: resnet152predict_net.pb
-  weights_path: resnet152init_net.pb
+  graph_path: resnet152_predict_net.pb
+  weights_path: resnet152_init_net.pb
   is_archive: false # if set, then the base_url is a url to an archive
                     # the graph_path and weights_path then denote the
                     # file names of the graph and weights within the archive
