@@ -1,4 +1,4 @@
-name: ResNet101 # name of your model
+name: VGG19 # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
@@ -12,12 +12,13 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe:ppc64le-gpu
     gpu: raiproject/carml-caffe:ppc64le-gpu
 description: >
-  TODO
+  The model is an improved version of the 19-layer model used by the VGG team in the ILSVRC-2014 competition.
 references: # references to papers / websites / etc.. describing the model
-  - https://github.com/KaimingHe/deep-residual-networks
-  - https://arxiv.org/abs/1512.03385
+  - https://gist.github.com/ksimonyan/3785162f95cd2d5fee77
+  - https://github.com/BVLC/caffe/wiki/Model-Zoo#models-used-by-the-vgg-team-in-ilsvrc-2014
+  - https://arxiv.org/abs/1409.1556
 # license of the model
-license: unrestricted
+license: CC BY 4.0 (commercial use is allowed)
 # inputs to the model
 inputs:
   # first input type for the model
@@ -34,17 +35,16 @@ output:
   description: the output label
   parameters:
     # type parameters
-    features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
+    features_url: http://data.dmlc.ml/mxnet/models/imagenet/synset.txt
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnet101
-  graph_path: predict_net.pb
-  weights_path: init_net.pb
+  graph_path: https://gist.githubusercontent.com/ksimonyan/3785162f95cd2d5fee77/raw/f43eeefc869d646b449aa6ce66f87bf987a1c9b5/VGG_ILSVRC_19_layers_deploy.prototxt
+  weights_path: http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_19_layers.caffemodel
   is_archive: false # if set, then the base_url is a url to an archive
                     # the graph_path and weights_path then denote the
                     # file names of the graph and weights within the archive
-  graph_checksum: 10c2536572cf73045e1ef97a189f479c
-  weights_checksum: bda7af910d85e42f38d13aa76816eeeb
+  graph_checksum: a96a47109a0bc5eecaa27c9c75eb917c
+  weights_checksum: b83d401efdb1ae0c4cd6748301f8a2d3
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training
