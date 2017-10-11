@@ -256,10 +256,8 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...
 		return nil, err
 	}
 
-	options := options.New(opts...)
-
 	var output []dlframework.Features
-	batchSize := int(options.BatchSize())
+	batchSize := int(p.BatchSize())
 
 	length := len(predictions) / batchSize
 	for i := 0; i < batchSize; i++ {
