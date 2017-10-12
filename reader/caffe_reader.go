@@ -10,6 +10,8 @@ import (
 	"github.com/rai-project/caffe2"
 )
 
+// example Usage:
+// go run caffe_reader.go ~/data/carml/dlframework/caffe2_0.8.1/squeezenet_1.0/predict_net.pb
 func main() {
 	modelFile := os.Args[1]
 	if !com.IsFile(modelFile) {
