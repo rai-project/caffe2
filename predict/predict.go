@@ -20,6 +20,7 @@ import (
 	gocaffe2 "github.com/rai-project/go-caffe2"
 	"github.com/rai-project/image"
 	"github.com/rai-project/image/types"
+	"github.com/rai-project/tracer"
 	"github.com/rai-project/tracer/ctimer"
 )
 
@@ -50,10 +51,8 @@ func New(model dlframework.ModelManifest, opts ...options.Option) (common.Predic
 
 // Load ...
 func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
-	if span, newCtx := opentracing.StartSpanFromContext(ctx, "Load"); span != nil {
-		ctx = newCtx
-		defer span.Finish()
-	}
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.STEP_TRACE, "Load")
+	defer span.Finish()
 
 	framework, err := model.ResolveFramework()
 	if err != nil {
@@ -114,8 +113,8 @@ func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.Prepr
 }
 
 func (p *ImagePredictor) download(ctx context.Context) error {
-	span, ctx := opentracing.StartSpanFromContext(
-		ctx,
+	span, ctx := tracer.StartSpanFromContext(ctx,
+		tracer.STEP_TRACE,
 		"Download",
 		opentracing.Tags{
 			"graph_url":           p.GetGraphUrl(),
@@ -180,7 +179,7 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 }
 
 func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
-	span, ctx := opentracing.StartSpanFromContext(ctx, "LoadPredictor")
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.STEP_TRACE, "LoadPredictor")
 	defer span.Finish()
 
 	span.LogFields(
@@ -229,21 +228,20 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 
 // Predict ...
 func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...options.Option) ([]dlframework.Features, error) {
-	span := opentracing.SpanFromContext(ctx)
-	_ = span
-
-	if err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
-		defer func() {
-			p.predictor.EndProfiling()
-			profBuffer, err := p.predictor.ReadProfile()
-			if err != nil {
-				return
-			}
-			if t, err := ctimer.New(profBuffer); err == nil {
-				t.Publish(ctx)
-			}
-			p.predictor.DisableProfiling()
-		}()
+	if p.TraceLevel() >= tracer.FRAMEWORK_TRACE {
+		if err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
+			defer func() {
+				p.predictor.EndProfiling()
+				profBuffer, err := p.predictor.ReadProfile()
+				if err != nil {
+					return
+				}
+				if t, err := ctimer.New(profBuffer); err == nil {
+					t.Publish(ctx)
+				}
+				p.predictor.DisableProfiling()
+			}()
+		}
 	}
 
 	var input []float32
