@@ -12,7 +12,10 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe:ppc64le-gpu
     gpu: raiproject/carml-caffe:ppc64le-gpu
 description: >
-  TODO
+  this model is a pretrained model on full imagenet dataset [1] with 14,197,087 images in 21,841 classes. The model is trained by only random crop and mirror augmentation.
+  The network is based on Inception-BN network [2], and added more capacity. This network runs roughly 2 times slower than standard Inception-BN Network.
+  [1] Deng, Jia, et al. "Imagenet: A large-scale hierarchical image database." Computer Vision and Pattern Recognition, 2009. CVPR 2009. IEEE Conference on. IEEE, 2009.
+  [2] Ioffe, Sergey, and Christian Szegedy. "Batch normalization: Accelerating deep network training by reducing internal covariate shift." arXiv preprint arXiv:1502.03167 (2015).
 references: # references to papers / websites / etc.. describing the model
   - https://github.com/pertusa/InceptionBN-21K-for-Caffe
   - https://github.com/BVLC/caffe/wiki/Model-Zoo
