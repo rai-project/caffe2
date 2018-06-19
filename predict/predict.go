@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	context "golang.org/x/net/context"
+	context "context"
 
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
