@@ -29,6 +29,3 @@ import:
   - ctimer
 - package: github.com/sirupsen/logrus
   version: ^1.0.0
-- package: golang.org/x/net
-  subpackages:
-  - context
