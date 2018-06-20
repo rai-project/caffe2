@@ -2,7 +2,7 @@ package: github.com/rai-project/caffe2
 import:
 - package: github.com/elazarl/go-bindata-assetfs
 - package: github.com/gogo/protobuf
-  version: ~0.5.0
+  version: ^1.0.0
   subpackages:
   - proto
 - package: github.com/opentracing/opentracing-go
