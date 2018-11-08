@@ -14,6 +14,7 @@ import (
 	"github.com/rai-project/config"
 	"github.com/rai-project/dlframework"
 	"github.com/rai-project/dlframework/framework/agent"
+	"github.com/rai-project/dlframework/framework/feature"
 	"github.com/rai-project/dlframework/framework/options"
 	common "github.com/rai-project/dlframework/framework/predict"
 	"github.com/rai-project/downloadmanager"
@@ -261,9 +262,12 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 }
 
 // Predict ...
-func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...options.Option) ([]dlframework.Features, error) {
+func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...options.Option) error {
 	if p.TraceLevel() >= tracer.FRAMEWORK_TRACE {
-		if err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
+		err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
+      if err != nil {
+        log.WithError(err).WithField("framework", "caffe2").Error("unable to start framework profiling")
+      } else {
 			defer func() {
 				p.predictor.EndProfiling()
 				profBuffer, err := p.predictor.ReadProfile()
@@ -271,11 +275,11 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...
 					return
 				}
 				if t, err := ctimer.New(profBuffer); err == nil {
-					t.Publish(ctx)
+					t.Publish(ctx, tracer.FRAMEWORK_TRACE)
 				}
 				p.predictor.DisableProfiling()
 			}()
-		}
+    }
 	}
 
 	var input []float32
@@ -285,21 +289,28 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...
 
 	predictions, err := p.predictor.Predict(input, int(p.BatchSize()), int(p.inputDims[0]), int(p.inputDims[1]), int(p.inputDims[2]))
 	if err != nil {
-		return nil, err
+		return err
 	}
+
+	return nil
+}
+
+// ReadPredictedFeatures ...
+func (p *ImagePredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
+	predictions := p.predictor.ReadPredictedFeatures(ctx)
 
 	var output []dlframework.Features
 	batchSize := int(p.BatchSize())
-
 	length := len(predictions) / batchSize
-	for i := 0; i < batchSize; i++ {
+
+	for ii := 0; ii < batchSize; ii++ {
 		rprobs := make([]*dlframework.Feature, length)
-		for j := 0; j < length; j++ {
-			rprobs[j] = &dlframework.Feature{
-				Index:       int64(j),
-				Name:        p.features[j],
-				Probability: predictions[i*length+j].Probability,
-			}
+		for jj := 0; jj < length; jj++ {
+			rprobs[jj] = feature.New(
+				feature.ClassificationIndex(int32(jj)),
+				feature.ClassificationName(p.features[jj]),
+				feature.Probability(predictions[ii*length+jj].Probability),
+			)
 		}
 		output = append(output, rprobs)
 	}
