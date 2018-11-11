@@ -30,7 +30,7 @@ type ImagePredictor struct {
 	common.ImagePredictor
 	features  []string
 	predictor *gocaffe2.Predictor
-	inputDims []uint32
+	inputDims []int
 }
 
 // New ...
@@ -52,7 +52,7 @@ func New(model dlframework.ModelManifest, opts ...options.Option) (common.Predic
 
 // Download ...
 func (p *ImagePredictor) Download(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) error {
-	span, ctx := tracer.StartSpanFromContext(ctx, tracer.STEP_TRACE, "Download")
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "Download")
 	defer span.Finish()
 
 	framework, err := model.ResolveFramework()
@@ -70,9 +70,9 @@ func (p *ImagePredictor) Download(ctx context.Context, model dlframework.ModelMa
 			Base: common.Base{
 				Framework: framework,
 				Model:     model,
+				WorkDir:   workDir,
 				Options:   options.New(opts...),
 			},
-			WorkDir: workDir,
 		},
 	}
 
@@ -85,7 +85,7 @@ func (p *ImagePredictor) Download(ctx context.Context, model dlframework.ModelMa
 
 // Load ...
 func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManifest, opts ...options.Option) (common.Predictor, error) {
-	span, ctx := tracer.StartSpanFromContext(ctx, tracer.STEP_TRACE, "Load")
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "Load")
 	defer span.Finish()
 
 	framework, err := model.ResolveFramework()
@@ -103,9 +103,9 @@ func (p *ImagePredictor) Load(ctx context.Context, model dlframework.ModelManife
 			Base: common.Base{
 				Framework: framework,
 				Model:     model,
+				WorkDir:   workDir,
 				Options:   options.New(opts...),
 			},
-			WorkDir: workDir,
 		},
 	}
 
@@ -149,7 +149,7 @@ func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.Prepr
 
 func (p *ImagePredictor) download(ctx context.Context) error {
 	span, ctx := tracer.StartSpanFromContext(ctx,
-		tracer.STEP_TRACE,
+		tracer.APPLICATION_TRACE,
 		"Download",
 		opentracing.Tags{
 			"graph_url":           p.GetGraphUrl(),
@@ -214,7 +214,7 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 }
 
 func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
-	span, ctx := tracer.StartSpanFromContext(ctx, tracer.STEP_TRACE, "LoadPredictor")
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "LoadPredictor")
 	defer span.Finish()
 
 	span.LogFields(
@@ -249,6 +249,7 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 	}
 
 	pred, err := gocaffe2.New(
+		ctx,
 		options.WithOptions(opts),
 		options.Graph([]byte(p.GetGraphPath())),
 		options.Weights([]byte(p.GetWeightsPath())),
@@ -264,10 +265,10 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 // Predict ...
 func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...options.Option) error {
 	if p.TraceLevel() >= tracer.FRAMEWORK_TRACE {
-		err := p.predictor.StartProfiling("caffe2", "predict"); err == nil {
-      if err != nil {
-        log.WithError(err).WithField("framework", "caffe2").Error("unable to start framework profiling")
-      } else {
+		err := p.predictor.StartProfiling("caffe2", "predict")
+		if err != nil {
+			log.WithError(err).WithField("framework", "caffe2").Error("unable to start framework profiling")
+		} else {
 			defer func() {
 				p.predictor.EndProfiling()
 				profBuffer, err := p.predictor.ReadProfile()
@@ -279,7 +280,7 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...
 				}
 				p.predictor.DisableProfiling()
 			}()
-    }
+		}
 	}
 
 	var input []float32
@@ -287,7 +288,7 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...
 		input = append(input, v...)
 	}
 
-	predictions, err := p.predictor.Predict(input, int(p.BatchSize()), int(p.inputDims[0]), int(p.inputDims[1]), int(p.inputDims[2]))
+	err := p.predictor.Predict(ctx, input, int(p.inputDims[0]), int(p.inputDims[1]), int(p.inputDims[2]))
 	if err != nil {
 		return err
 	}
