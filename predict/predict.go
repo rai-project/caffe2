@@ -14,7 +14,6 @@ import (
 	"github.com/rai-project/config"
 	"github.com/rai-project/dlframework"
 	"github.com/rai-project/dlframework/framework/agent"
-	"github.com/rai-project/dlframework/framework/feature"
 	"github.com/rai-project/dlframework/framework/options"
 	common "github.com/rai-project/dlframework/framework/predict"
 	"github.com/rai-project/downloadmanager"
@@ -28,7 +27,7 @@ import (
 // ImagePredictor ...
 type ImagePredictor struct {
 	common.ImagePredictor
-	features  []string
+	labels    []string
 	predictor *gocaffe2.Predictor
 	inputDims []int
 }
@@ -150,7 +149,7 @@ func (p *ImagePredictor) GetPreprocessOptions(ctx context.Context) (common.Prepr
 func (p *ImagePredictor) download(ctx context.Context) error {
 	span, ctx := tracer.StartSpanFromContext(ctx,
 		tracer.APPLICATION_TRACE,
-		"Download",
+		"download",
 		opentracing.Tags{
 			"graph_url":           p.GetGraphUrl(),
 			"target_graph_file":   p.GetGraphPath(),
@@ -214,7 +213,7 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 }
 
 func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
-	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "LoadPredictor")
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "load_predictor")
 	defer span.Finish()
 
 	span.LogFields(
@@ -298,24 +297,15 @@ func (p *ImagePredictor) Predict(ctx context.Context, data [][]float32, opts ...
 
 // ReadPredictedFeatures ...
 func (p *ImagePredictor) ReadPredictedFeatures(ctx context.Context) ([]dlframework.Features, error) {
-	predictions := p.predictor.ReadPredictedFeatures(ctx)
+	span, ctx := tracer.StartSpanFromContext(ctx, tracer.APPLICATION_TRACE, "read_predicted_features")
+	defer span.Finish()
 
-	var output []dlframework.Features
-	batchSize := int(p.BatchSize())
-	length := len(predictions) / batchSize
-
-	for ii := 0; ii < batchSize; ii++ {
-		rprobs := make([]*dlframework.Feature, length)
-		for jj := 0; jj < length; jj++ {
-			rprobs[jj] = feature.New(
-				feature.ClassificationIndex(int32(jj)),
-				feature.ClassificationLabel(p.features[jj]),
-				feature.Probability(predictions[ii*length+jj].Probability),
-			)
-		}
-		output = append(output, rprobs)
+	output, err := p.predictor.ReadPredictionOutput(ctx)
+	if err != nil {
+		return nil, err
 	}
-	return output, nil
+
+	return p.CreatePredictedFeatures(ctx, output, p.labels)
 }
 
 // Reset ...
