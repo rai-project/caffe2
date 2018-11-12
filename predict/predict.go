@@ -220,7 +220,7 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 		olog.String("event", "read features"),
 	)
 
-	var features []string
+	var labels []string
 	f, err := os.Open(p.GetFeaturesPath())
 	if err != nil {
 		return errors.Wrapf(err, "cannot read %s", p.GetFeaturesPath())
@@ -229,9 +229,9 @@ func (p *ImagePredictor) loadPredictor(ctx context.Context) error {
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		line := scanner.Text()
-		features = append(features, line)
+		labels = append(labels, line)
 	}
-	p.features = features
+	p.labels = labels
 
 	p.inputDims, err = p.GetImageDimensions()
 	if err != nil {
