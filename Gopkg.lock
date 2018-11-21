@@ -342,6 +342,7 @@
     "pkg/jsonmessage",
     "pkg/longpath",
     "pkg/mount",
+    "pkg/parsers",
     "pkg/pools",
     "pkg/progress",
     "pkg/signal",
@@ -1272,7 +1273,7 @@
   name = "github.com/rai-project/go-caffe2"
   packages = ["."]
   pruneopts = "T"
-  revision = "41415ba33fbed2c316323a0edd55d6297c13f211"
+  revision = "f1982a278223c1f8ce95366e62ea395c47fbc07a"
 
 [[projects]]
   branch = "master"

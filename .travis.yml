@@ -1,19 +1,18 @@
 language: go
-matrix:
-  include:
-    - go: 1.10.x
-    - go: 1.11.x
-    - go: tip
-  allow_failures:
-    - go: tip
 dist: xenial
-sudo: false
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - TRAVIS_REPO_OWNER=${TRAVIS_REPO_SLUG#*/}
+    - TRAVIS_REPO_NAME=${TRAVIS_REPO_SLUG%/*}
 before_install:
-  - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-install:
-  - dep ensure -v
-  - go build
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 script:
-  - echo "Skip tests..."
-after_script:
-  - go test -race -v .
+  - cd ${TRAVIS_BUILD_DIR}/dockerfiles
+  - make build
+  - make push
+  - cd ${TRAVIS_BUILD_DIR}/${TRAVIS_REPO_NAME}-agent/dockerfiles
+  - make build
+  - make push
