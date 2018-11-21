@@ -342,7 +342,6 @@
     "pkg/jsonmessage",
     "pkg/longpath",
     "pkg/mount",
-    "pkg/parsers",
     "pkg/pools",
     "pkg/progress",
     "pkg/signal",
