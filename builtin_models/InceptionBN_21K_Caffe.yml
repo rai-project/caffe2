@@ -1,10 +1,10 @@
-name: InceptionBN-21K # name of your model
+name: InceptionBN_21K_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
 version: 2.0 # version information in semantic version format
 container: # containers used to perform model prediction
-           # multiple platforms can be specified
+  # multiple platforms can be specified
   amd64:
     gpu: raiproject/carml-caffe:amd64-cpu
     cpu: raiproject/carml-caffe:amd64-gpu
@@ -39,15 +39,16 @@ output:
   description: the output label
   parameters:
     # type parameters
-    features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset-21k.txt
+    features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset_21k.txt
     features_checksum: 851bbe06499cf53fa6f8fb72ad61e906
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inceptionbn-21k
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inceptionbn_21k/inceptionbn_21k_caffe
   graph_path: predict_net.pb
   weights_path: init_net.pb
-  is_archive: false # if set, then the base_url is a url to an archive
-                    # the graph_path and weights_path then denote the
-                    # file names of the graph and weights within the archive
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
   graph_checksum: 3e6ff39fcd75caaf20644bb1fde80811
   weights_checksum: a91e384bb76117832f3bd3058142080a
 attributes: # extra network attributes

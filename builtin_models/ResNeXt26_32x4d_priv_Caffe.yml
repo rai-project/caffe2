@@ -1,10 +1,10 @@
-name: ResNet18 # name of your model
+name: ResNeXt26_32x4d_priv_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
 version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
-           # multiple platforms can be specified
+  # multiple platforms can be specified
   amd64:
     gpu: raiproject/carml-caffe:amd64-cpu
     cpu: raiproject/carml-caffe:amd64-gpu
@@ -12,16 +12,14 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe:ppc64le-gpu
     gpu: raiproject/carml-caffe:ppc64le-gpu
 description: >
-  A Residual learning framework to ease the training of networks that are substantially deeper than those used previously.
-  We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions.
-  We provide comprehensive empirical evidence showing that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth.
-  On the ImageNet dataset we evaluate residual nets with a depth of up to 152 layers---8x deeper than VGG nets but still having lower complexity.
-  An ensemble of these residual nets achieves 3.57% error on the ImageNet test set. This result won the 1st place on the ILSVRC 2015 classification task.
+  This resnext26-32x4d-priv is trained under pytorch by bupt-priv.
+  ResNeXt is a simple, highly modularized network architecture for image classification. Our network is constructed by repeating
+  a building block that aggregates a set of transformations with the same topology. Our simple design results in a homogeneous,
+  multi-branch architecture that has only a few hyper-parameters to set. This strategy exposes a new dimension, which we call
+  “cardinality” (the size of the set of transformations), as an essential factor in addition to the dimensions of depth and width.
 references: # references to papers / websites / etc.. describing the model
   - https://github.com/soeaver/caffe-model/tree/master/cls
   - https://github.com/soeaver/pytorch-classification
-  - https://arxiv.org/abs/1512.03385
-  - https://github.com/leonardvandriel/caffe2_models
 # license of the model
 license: unrestricted
 # inputs to the model
@@ -33,7 +31,7 @@ inputs:
     parameters: # type parameters
       dimensions: [3, 224, 224]
       mean: [123.675, 116.28, 103.52]
-      scale: 128
+      scale: 256
 output:
   # the type of the output
   type: feature
@@ -44,18 +42,18 @@ output:
     features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnet18-priv
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnext26_32x4d_priv/resnext26_32x4d_priv_caffe
   graph_path: predict_net.pb
   weights_path: init_net.pb
-  is_archive: false # if set, then the base_url is a url to an archive
-                    # the graph_path and weights_path then denote the
-                    # file names of the graph and weights within the archive
-  graph_checksum: 3be2756ee276ece8c6f381b41a2d8f0a
-  weights_checksum: 1fa62bf9bc55ec8e76b0e1f9d744b59d
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
+  graph_checksum: 8fc3f084dbb54fab7bd2eba14d5c1b5f
+  weights_checksum: e0e4920723467a92271e5b6fb2eddfc7
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training
   manifest_author: abduld
 # hidden: true # Message type "caffe.PoolingParameter" has no field named "ceil_mode"
 # https://github.com/BVLC/caffe/pull/3057/files
-

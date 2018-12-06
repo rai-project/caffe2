@@ -6,8 +6,8 @@ fmt:
 install-deps:
 	go get github.com/jteeuwen/go-bindata/...
 	go get github.com/elazarl/go-bindata-assetfs/...
-  go get github.com/golang/dep
-  dep ensure -v
+	go get github.com/golang/dep
+	dep ensure -v
 
 generate: clean generate-models
 
@@ -25,6 +25,6 @@ clean-proto:
 
 clean: clean-models
 
-travis: install-deps glide-install logrus-fix generate
+travis: install-deps generate
 	echo "building..."
 	go build

@@ -1,0 +1,50 @@
+name: SqueezeNet_v1.0_Caffe2 # name of your model
+framework:
+  name: Caffe2 # framework for the model
+  version: 0.8.1 # framework version contraint
+version: 1.0 # version information in semantic version format
+container: # containers used to perform model prediction
+  # multiple platforms can be specified
+  amd64:
+    gpu: raiproject/carml-caffe:amd64-cpu
+    cpu: raiproject/carml-caffe:amd64-gpu
+  ppc64le:
+    cpu: raiproject/carml-caffe:ppc64le-gpu
+    gpu: raiproject/carml-caffe:ppc64le-gpu
+description: >
+  Trained SqueezeNet model on Caffe2.
+references: # references to papers / websites / etc.. describing the model
+  - https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/squeezenet/squeezenet.json
+# license of the model
+license: BAIR
+# inputs to the model
+inputs:
+  # first input type for the model
+  - type: image
+    # description of the first input
+    description: the input image
+    parameters: # type parameters
+      dimensions: [3, 224, 224]
+output:
+  # the type of the output
+  type: feature
+  # a description of the output parameter
+  description: the output label
+  parameters:
+    # type parameters
+    features_url: https://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
+    features_checksum: 4d234b5833aca44928065a180db3016a
+model: # specifies model graph and weights resources
+  base_url: http://s3.amazonaws.com/store.carml.org/models/caffe2/squeezenet_v1.0/squeezenet_v1.0_caffe2
+  graph_path: predict_net.pb
+  weights_path: init_net.pb
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
+  graph_checksum: 694bfdd02e9ccb57bfc4acb451fbfb2d
+  weights_checksum: a589d31d93c44d353ae2cd92af4d5a3f
+attributes: # extra network attributes
+  kind: CNN # the kind of neural network (CNN, RNN, ...)
+  training_dataset: ImageNet # dataset used to for training
+  manifest_author: cheng

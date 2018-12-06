@@ -1,10 +1,10 @@
-name: ResNet50 # name of your model
+name: ResNet101_v2_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
 version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
-           # multiple platforms can be specified
+  # multiple platforms can be specified
   amd64:
     gpu: raiproject/carml-caffe:amd64-cpu
     cpu: raiproject/carml-caffe:amd64-gpu
@@ -18,9 +18,10 @@ description: >
   On the ImageNet dataset we evaluate residual nets with a depth of up to 152 layers---8x deeper than VGG nets but still having lower complexity.
   An ensemble of these residual nets achieves 3.57% error on the ImageNet test set. This result won the 1st place on the ILSVRC 2015 classification task.
 references: # references to papers / websites / etc.. describing the model
-  - https://github.com/leonardvandriel/caffe2_models
-  - https://github.com/KaimingHe/deep-residual-networks
+  - https://github.com/soeaver/caffe-model/tree/master/cls
+  - https://github.com/craftGBD/craftGBD
   - https://arxiv.org/abs/1512.03385
+  - https://github.com/leonardvandriel/caffe2_models
 # license of the model
 license: unrestricted
 # inputs to the model
@@ -31,7 +32,7 @@ inputs:
     description: the input image
     parameters: # type parameters
       dimensions: [3, 224, 224]
-      mean: [123.68, 116.779, 103.939]
+      mean: [122.772, 115.947, 102.98]
 output:
   # the type of the output
   type: feature
@@ -42,14 +43,15 @@ output:
     features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnet50
-  graph_path: resnet50_predict_net.pb
-  weights_path: resnet50_init_net.pb
-  is_archive: false # if set, then the base_url is a url to an archive
-                    # the graph_path and weights_path then denote the
-                    # file names of the graph and weights within the archive
-  graph_checksum: 57bc5f7493d089df7c4e35a673677a60
-  weights_checksum: 080623733fd80e728c9c145d44de67ca
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnet101_v2/resnet101_v2_caffe
+  graph_path: predict_net.pb
+  weights_path: init_net.pb
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
+  graph_checksum: 27591c0c6dddc01c0c235ab5783af0cb
+  weights_checksum: 220fad7b043d927d6baa259fd9e97d47
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training

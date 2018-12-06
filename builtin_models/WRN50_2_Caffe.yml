@@ -1,10 +1,10 @@
-name: WRN50 # name of your model
+name: WRN50_2_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
-version: 2.0 # version information in semantic version format
+version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
-           # multiple platforms can be specified
+  # multiple platforms can be specified
   amd64:
     gpu: raiproject/carml-caffe:amd64-cpu
     cpu: raiproject/carml-caffe:amd64-gpu
@@ -12,6 +12,7 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe:ppc64le-gpu
     gpu: raiproject/carml-caffe:ppc64le-gpu
 description: >
+  Same as resnet50-1x128d.
   This model was used for experiments with Wide Residual Networks (BMVC 2016) http://arxiv.org/abs/1605.07146 by Sergey Zagoruyko and Nikos Komodakis.
   Deep residual networks were shown to be able to scale up to thousands of layers and still have improving performance. However, each fraction of a percent
   of improved accuracy costs nearly doubling the number of layers, and so training very deep residual networks has a problem of diminishing feature reuse,
@@ -45,12 +46,13 @@ output:
     features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/wrn50-2
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/wrn50_2/wrn50_2_caffe
   graph_path: predict_net.pb
   weights_path: init_net.pb
-  is_archive: false # if set, then the base_url is a url to an archive
-                    # the graph_path and weights_path then denote the
-                    # file names of the graph and weights within the archive
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
   graph_checksum: 3bc2e0c2792adc647d9e0c4b8feca610
   weights_checksum: 680012c920ee212165ee071e195cd1e7
 attributes: # extra network attributes

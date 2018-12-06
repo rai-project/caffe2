@@ -1,10 +1,10 @@
-name: BVLC-Reference-RCNN-ILSVRC13 # name of your model
+name: BVLC_Reference_RCNN_ILSVRC13_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
 version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
-           # multiple platforms can be specified
+  # multiple platforms can be specified
   amd64:
     gpu: raiproject/carml-caffe:amd64-cpu
     cpu: raiproject/carml-caffe:amd64-gpu
@@ -41,12 +41,13 @@ output:
     features_url: https://raw.githubusercontent.com/rai-project/carml-models/master/data/ilsvrc12/det_synset_words.txt
     features_checksum: fe0fe33bc8cb071f8ca73073d97973c6
 model: # specifies model graph and weights resources
-  base_url: http://s3.amazonaws.com/store.carml.org/models/caffe2/bvlc_reference_rcnn_ilsvrc13_1.0/
+  base_url: http://s3.amazonaws.com/store.carml.org/models/caffe2/bvlc_reference_rcnn_ilsvrc13/bvlc_reference_rcnn_ilsvrc13_caffe
   graph_path: predict_net.pb
   weights_path: init_net.pb
-  is_archive: false # if set, then the base_url is a url to an archive
-                    # the graph_path and weights_path then denote the
-                    # file names of the graph and weights within the archive
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
   graph_checksum: 960b6ea7a44230d75ff95a737904bd43
   weights_checksum: b58cdeed9d117ebf31badc87e7edf71e
 attributes: # extra network attributes

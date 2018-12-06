@@ -1,10 +1,10 @@
-name: ResNeXt26-32x4d # name of your model
+name: Inception_v4_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
 version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
-           # multiple platforms can be specified
+  # multiple platforms can be specified
   amd64:
     gpu: raiproject/carml-caffe:amd64-cpu
     cpu: raiproject/carml-caffe:amd64-gpu
@@ -12,13 +12,15 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe:ppc64le-gpu
     gpu: raiproject/carml-caffe:ppc64le-gpu
 description: >
-  ResNeXt is a simple, highly modularized network architecture for image classification. Our network is constructed by repeating
-  a building block that aggregates a set of transformations with the same topology. Our simple design results in a homogeneous,
-  multi-branch architecture that has only a few hyper-parameters to set. This strategy exposes a new dimension, which we call
-  “cardinality” (the size of the set of transformations), as an essential factor in addition to the dimensions of depth and width.
+  More uniform  simplified  architecture  and  more  inception  modules than Inception-v3.
+  Achieved 3.08% top-5 error on the test set of the ImageNet classification (CLS) challenge.
 references: # references to papers / websites / etc.. describing the model
   - https://github.com/soeaver/caffe-model/tree/master/cls
-  - https://github.com/soeaver/pytorch-classification
+  - https://arxiv.org/abs/1602.07261
+  - https://github.com/tensorflow/models/blob/master/research/slim/nets/inception_v4.py
+  - https://github.com/tensorflow/models/blob/master/research/slim/preprocessing/inception_preprocessing.py
+  - https://github.com/kentsommer/keras-inceptionV4/issues/5
+  - https://github.com/leonardvandriel/caffe2_models
 # license of the model
 license: unrestricted
 # inputs to the model
@@ -28,9 +30,9 @@ inputs:
     # description of the first input
     description: the input image
     parameters: # type parameters
-      dimensions: [3, 224, 224]
-      mean: [123.675, 116.28, 103.52]
-      scale: 256
+      dimensions: [3, 299, 299]
+      mean: [128, 128, 128]
+      scale: 128
 output:
   # the type of the output
   type: feature
@@ -41,17 +43,16 @@ output:
     features_url: http://s3.amazonaws.com/store.carml.org/synsets/imagenet/synset.txt
     features_checksum: 4d234b5833aca44928065a180db3016a
 model: # specifies model graph and weights resources
-  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/resnext26-32x4d-priv
+  base_url: https://s3.amazonaws.com/store.carml.org/models/caffe2/inception_v4/inception_v4_caffe
   graph_path: predict_net.pb
   weights_path: init_net.pb
-  is_archive: false # if set, then the base_url is a url to an archive
-                    # the graph_path and weights_path then denote the
-                    # file names of the graph and weights within the archive
-  graph_checksum: 8fc3f084dbb54fab7bd2eba14d5c1b5f
-  weights_checksum: e0e4920723467a92271e5b6fb2eddfc7
+  is_archive:
+    false # if set, then the base_url is a url to an archive
+    # the graph_path and weights_path then denote the
+    # file names of the graph and weights within the archive
+  graph_checksum: 4ce199ddd7d1073195bdb48f09585513
+  weights_checksum: b9947a80abc059b1564fd914ac6b576d
 attributes: # extra network attributes
   kind: CNN # the kind of neural network (CNN, RNN, ...)
   training_dataset: ImageNet # dataset used to for training
   manifest_author: abduld
-# hidden: true # Message type "caffe.PoolingParameter" has no field named "ceil_mode"
-# https://github.com/BVLC/caffe/pull/3057/files
