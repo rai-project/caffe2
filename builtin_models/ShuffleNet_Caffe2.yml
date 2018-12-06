@@ -25,6 +25,7 @@ inputs:
     description: the input image
     parameters: # type parameters
       dimensions: [3, 224, 224]
+      scale: 256
 output:
   # the type of the output
   type: feature
