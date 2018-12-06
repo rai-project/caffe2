@@ -1,4 +1,4 @@
-name: SqueezeNet_v1.0_Caffe # name of your model
+name: SqueezeNet_v1.1_Caffe # name of your model
 framework:
   name: Caffe2 # framework for the model
   version: 0.8.1 # framework version contraint
