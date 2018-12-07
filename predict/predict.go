@@ -173,42 +173,51 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 		}
 		return nil
 	}
-	checksum := p.GetGraphChecksum()
-	if checksum == "" {
-		return errors.New("Need graph file checksum in the model manifest")
+
+	checksum := ""
+	if p.GetGraphUrl() != "" {
+		checksum = p.GetGraphChecksum()
+		if checksum == "" {
+			return errors.New("Need graph file checksum in the model manifest")
+		}
+
+		span.LogFields(
+			olog.String("event", "download graph"),
+		)
+		if _, err := downloadmanager.DownloadFile(p.GetGraphUrl(), p.GetGraphPath(), downloadmanager.MD5Sum(checksum)); err != nil {
+			return err
+
+		}
+	}
+	// fmt.Println(p.GetWeightsUrl())
+	if p.GetWeightsUrl() != "" {
+		// fmt.Println(p.GetWeightsUrl())
+		checksum = p.GetWeightsChecksum()
+		if checksum == "" {
+			return errors.New("Need weights file checksum in the model manifest")
+		}
+
+		span.LogFields(
+			olog.String("event", "download weights"),
+		)
+		if _, err := downloadmanager.DownloadFile(p.GetWeightsUrl(), p.GetWeightsPath(), downloadmanager.MD5Sum(checksum)); err != nil {
+			return err
+		}
 	}
 
-	span.LogFields(
-		olog.String("event", "download graph"),
-	)
-	if _, err := downloadmanager.DownloadFile(p.GetGraphUrl(), p.GetGraphPath(), downloadmanager.MD5Sum(checksum)); err != nil {
-		return err
-	}
+	if p.GetFeaturesUrl() != "" {
+		checksum = p.GetFeaturesChecksum()
+		if checksum == "" {
+			return errors.New("Need features file checksum in the model manifest")
+		}
 
-	checksum = p.GetWeightsChecksum()
-	if checksum == "" {
-		return errors.New("Need weights file checksum in the model manifest")
+		span.LogFields(
+			olog.String("event", "download features"),
+		)
+		if _, err := downloadmanager.DownloadFile(p.GetFeaturesUrl(), p.GetFeaturesPath(), downloadmanager.MD5Sum(checksum)); err != nil {
+			return err
+		}
 	}
-
-	span.LogFields(
-		olog.String("event", "download weights"),
-	)
-	if _, err := downloadmanager.DownloadFile(p.GetWeightsUrl(), p.GetWeightsPath(), downloadmanager.MD5Sum(checksum)); err != nil {
-		return err
-	}
-
-	checksum = p.GetFeaturesChecksum()
-	if checksum == "" {
-		return errors.New("Need features file checksum in the model manifest")
-	}
-
-	span.LogFields(
-		olog.String("event", "download features"),
-	)
-	if _, err := downloadmanager.DownloadFile(p.GetFeaturesUrl(), p.GetFeaturesPath(), downloadmanager.MD5Sum(checksum)); err != nil {
-		return err
-	}
-
 	return nil
 }
 
