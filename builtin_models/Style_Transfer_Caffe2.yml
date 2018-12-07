@@ -6,11 +6,11 @@ version: 1.0 # version information in semantic version format
 container: # containers used to perform model prediction
   # multiple platforms can be specified
   amd64:
-    gpu: raiproject/carml-caffe:amd64-cpu
-    cpu: raiproject/carml-caffe:amd64-gpu
+    gpu: raiproject/carml-caffe2:amd64-cpu
+    cpu: raiproject/carml-caffe2:amd64-gpu
   ppc64le:
-    cpu: raiproject/carml-caffe:ppc64le-gpu
-    gpu: raiproject/carml-caffe:ppc64le-gpu
+    cpu: raiproject/carml-caffe2:ppc64le-gpu
+    gpu: raiproject/carml-caffe2:ppc64le-gpu
 description: >
   Trained style transfer on Caffe2.
 references: # references to papers / websites / etc.. describing the model
