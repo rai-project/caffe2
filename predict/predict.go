@@ -10,6 +10,7 @@ import (
 	opentracing "github.com/opentracing/opentracing-go"
 	olog "github.com/opentracing/opentracing-go/log"
 	"github.com/pkg/errors"
+
 	"github.com/rai-project/caffe2"
 	"github.com/rai-project/config"
 	"github.com/rai-project/dlframework"
@@ -189,9 +190,8 @@ func (p *ImagePredictor) download(ctx context.Context) error {
 
 		}
 	}
-	// fmt.Println(p.GetWeightsUrl())
+
 	if p.GetWeightsUrl() != "" {
-		// fmt.Println(p.GetWeightsUrl())
 		checksum = p.GetWeightsChecksum()
 		if checksum == "" {
 			return errors.New("Need weights file checksum in the model manifest")
