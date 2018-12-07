@@ -12,7 +12,7 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe2:ppc64le-gpu
     gpu: raiproject/carml-caffe2:ppc64le-gpu
 description: >
-  Trained style transfer on Caffe2.
+  Trained style transfer on Caffe2..
 references: # references to papers / websites / etc.. describing the model
   - https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/style_transfer/style_transfer.json
 # license of the model

@@ -12,7 +12,7 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe2:ppc64le-gpu
     gpu: raiproject/carml-caffe2:ppc64le-gpu
 description: >
-  Trained BVLC Reference CaffeNet on Caffe2
+  Trained BVLC Reference CaffeNet on Caffe2.
 references: # references to papers / websites / etc.. describing the model
   - https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/bvlc_reference_caffenet/bvlc_reference_caffenet.json
 # license of the model

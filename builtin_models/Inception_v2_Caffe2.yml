@@ -12,7 +12,7 @@ container: # containers used to perform model prediction
     cpu: raiproject/carml-caffe2:ppc64le-gpu
     gpu: raiproject/carml-caffe2:ppc64le-gpu
 description: >
-  Trained Inception V2 on Caffe2
+  Trained Inception V2 on Caffe2.
 references: # references to papers / websites / etc.. describing the model
   - https://github.com/facebook/FAI-PEP/blob/master/specifications/models/caffe2/inception_v2/inception_v2.json
 license: unrestricted
