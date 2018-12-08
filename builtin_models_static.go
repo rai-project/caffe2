@@ -122,7 +122,7 @@ func bvlc_alexnet_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_AlexNet_Caffe.yml", size: 2767, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "BVLC_AlexNet_Caffe.yml", size: 2767, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -142,7 +142,7 @@ func bvlc_alexnet_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_AlexNet_Caffe2.yml", size: 1989, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "BVLC_AlexNet_Caffe2.yml", size: 1989, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -162,7 +162,7 @@ func bvlc_googlenet_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_GoogLeNet_Caffe.yml", size: 3163, mode: os.FileMode(420), modTime: time.Unix(1544124315, 0)}
+	info := bindataFileInfo{name: "BVLC_GoogLeNet_Caffe.yml", size: 3163, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -182,7 +182,7 @@ func bvlc_googlenet_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_GoogLeNet_Caffe2.yml", size: 2000, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "BVLC_GoogLeNet_Caffe2.yml", size: 2000, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -202,7 +202,7 @@ func bvlc_reference_caffenet_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_Reference_CaffeNet_Caffe.yml", size: 2896, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "BVLC_Reference_CaffeNet_Caffe.yml", size: 2896, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -222,7 +222,7 @@ func bvlc_reference_caffenet_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_Reference_CaffeNet_Caffe2.yml", size: 2065, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "BVLC_Reference_CaffeNet_Caffe2.yml", size: 2065, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -242,7 +242,7 @@ func bvlc_reference_rcnn_ilsvrc13_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_Reference_RCNN_ILSVRC13_Caffe.yml", size: 2545, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "BVLC_Reference_RCNN_ILSVRC13_Caffe.yml", size: 2545, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -262,7 +262,7 @@ func bvlc_reference_rcnn_ilsvrc13_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "BVLC_Reference_RCNN_ILSVRC13_Caffe2.yml", size: 2106, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "BVLC_Reference_RCNN_ILSVRC13_Caffe2.yml", size: 2106, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -282,7 +282,7 @@ func densenet121_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "DenseNet121_Caffe2.yml", size: 1990, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "DenseNet121_Caffe2.yml", size: 1990, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -302,7 +302,7 @@ func inceptionbn_21k_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "InceptionBN_21K_Caffe.yml", size: 2801, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "InceptionBN_21K_Caffe.yml", size: 2801, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -322,7 +322,7 @@ func inception_v1_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "Inception_v1_Caffe2.yml", size: 1965, mode: os.FileMode(420), modTime: time.Unix(1544197221, 0)}
+	info := bindataFileInfo{name: "Inception_v1_Caffe2.yml", size: 1965, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -342,7 +342,7 @@ func inception_v2_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "Inception_v2_Caffe2.yml", size: 1965, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "Inception_v2_Caffe2.yml", size: 1965, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -362,7 +362,7 @@ func inception_v3_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "Inception_v3_Caffe.yml", size: 2454, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "Inception_v3_Caffe.yml", size: 2454, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -382,7 +382,7 @@ func inception_v4_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "Inception_v4_Caffe.yml", size: 2475, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "Inception_v4_Caffe.yml", size: 2475, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -402,7 +402,7 @@ func mobilenet_v2_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "MobileNet_v2_Caffe2.yml", size: 1989, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "MobileNet_v2_Caffe2.yml", size: 1989, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -422,7 +422,7 @@ func resnext101_32x4d_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNeXt101_32x4d_Caffe.yml", size: 2745, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNeXt101_32x4d_Caffe.yml", size: 2745, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -442,7 +442,7 @@ func resnext26_32x4d_priv_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNeXt26_32x4d_priv_Caffe.yml", size: 2751, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNeXt26_32x4d_priv_Caffe.yml", size: 2751, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -462,7 +462,7 @@ func resnext50_32x4d_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNeXt50_32x4d_Caffe.yml", size: 2742, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNeXt50_32x4d_Caffe.yml", size: 2742, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -482,7 +482,7 @@ func resnet101_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet101_Caffe.yml", size: 2773, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet101_Caffe.yml", size: 2773, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -502,7 +502,7 @@ func resnet101_v2_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet101_v2_Caffe.yml", size: 2806, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet101_v2_Caffe.yml", size: 2806, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -522,7 +522,7 @@ func resnet152_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet152_Caffe.yml", size: 2769, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet152_Caffe.yml", size: 2769, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -542,7 +542,7 @@ func resnet152_v2_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet152_v2_Caffe.yml", size: 2817, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet152_v2_Caffe.yml", size: 2817, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -562,7 +562,7 @@ func resnet18_priv_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet18_priv_Caffe.yml", size: 2296, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet18_priv_Caffe.yml", size: 2296, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -582,7 +582,7 @@ func resnet269_v2_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet269_v2_Caffe.yml", size: 2815, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet269_v2_Caffe.yml", size: 2815, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -602,7 +602,7 @@ func resnet50_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet50_Caffe.yml", size: 2768, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "ResNet50_Caffe.yml", size: 2768, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -622,7 +622,7 @@ func resnet50_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ResNet50_Caffe2.yml", size: 1972, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "ResNet50_Caffe2.yml", size: 1972, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -642,7 +642,7 @@ func shufflenet_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ShuffleNet_Caffe2.yml", size: 1994, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "ShuffleNet_Caffe2.yml", size: 1994, mode: os.FileMode(436), modTime: time.Unix(1544223157, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -662,7 +662,7 @@ func shufflenet_v11_onnxYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ShuffleNet_v1.1_ONNX.yml", size: 1892, mode: os.FileMode(420), modTime: time.Unix(1544219811, 0)}
+	info := bindataFileInfo{name: "ShuffleNet_v1.1_ONNX.yml", size: 1892, mode: os.FileMode(436), modTime: time.Unix(1544220946, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -682,7 +682,7 @@ func shufflenet_v12_onnxYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ShuffleNet_v1.2_ONNX.yml", size: 1892, mode: os.FileMode(420), modTime: time.Unix(1544219822, 0)}
+	info := bindataFileInfo{name: "ShuffleNet_v1.2_ONNX.yml", size: 1892, mode: os.FileMode(436), modTime: time.Unix(1544220946, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -702,7 +702,7 @@ func shufflenet_v13_onnxYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "ShuffleNet_v1.3_ONNX.yml", size: 1892, mode: os.FileMode(420), modTime: time.Unix(1544219839, 0)}
+	info := bindataFileInfo{name: "ShuffleNet_v1.3_ONNX.yml", size: 1892, mode: os.FileMode(436), modTime: time.Unix(1544220946, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -722,7 +722,7 @@ func squeezenet_v10_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "SqueezeNet_v1.0_Caffe.yml", size: 2297, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "SqueezeNet_v1.0_Caffe.yml", size: 2297, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -742,7 +742,7 @@ func squeezenet_v10_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "SqueezeNet_v1.0_Caffe2.yml", size: 1989, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "SqueezeNet_v1.0_Caffe2.yml", size: 1989, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -762,7 +762,7 @@ func squeezenet_v11_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "SqueezeNet_v1.1_Caffe.yml", size: 2139, mode: os.FileMode(420), modTime: time.Unix(1544131599, 0)}
+	info := bindataFileInfo{name: "SqueezeNet_v1.1_Caffe.yml", size: 2139, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -782,7 +782,7 @@ func style_transfer_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "Style_Transfer_Caffe2.yml", size: 2005, mode: os.FileMode(420), modTime: time.Unix(1544197220, 0)}
+	info := bindataFileInfo{name: "Style_Transfer_Caffe2.yml", size: 2005, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -802,7 +802,7 @@ func vgg16_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "VGG16_Caffe.yml", size: 2186, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "VGG16_Caffe.yml", size: 2186, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -822,7 +822,7 @@ func vgg16_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "VGG16_Caffe2.yml", size: 1958, mode: os.FileMode(420), modTime: time.Unix(1544197221, 0)}
+	info := bindataFileInfo{name: "VGG16_Caffe2.yml", size: 1958, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -842,7 +842,7 @@ func vgg16_sod_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "VGG16_SOD_Caffe.yml", size: 2446, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "VGG16_SOD_Caffe.yml", size: 2446, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -862,7 +862,7 @@ func vgg19_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "VGG19_Caffe.yml", size: 2186, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "VGG19_Caffe.yml", size: 2186, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -882,7 +882,7 @@ func vgg19_caffe2Yml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "VGG19_Caffe2.yml", size: 1958, mode: os.FileMode(420), modTime: time.Unix(1544197221, 0)}
+	info := bindataFileInfo{name: "VGG19_Caffe2.yml", size: 1958, mode: os.FileMode(436), modTime: time.Unix(1544205720, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
@@ -902,7 +902,7 @@ func wrn50_2_caffeYml() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "WRN50_2_Caffe.yml", size: 3063, mode: os.FileMode(420), modTime: time.Unix(1544155128, 0)}
+	info := bindataFileInfo{name: "WRN50_2_Caffe.yml", size: 3063, mode: os.FileMode(436), modTime: time.Unix(1544158574, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
