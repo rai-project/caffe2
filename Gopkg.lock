@@ -354,7 +354,7 @@
     "pkg/term/windows",
   ]
   pruneopts = "T"
-  revision = "a4a816b6bbed2d1442a1646143662b0f16f0535e"
+  revision = "edf5134ba77dba1cdeac8726500a413e1a87361d"
 
 [[projects]]
   branch = "master"
@@ -908,6 +908,14 @@
   version = "v0.2.8"
 
 [[projects]]
+  digest = "0:"
+  name = "github.com/leodido/go-urn"
+  packages = ["."]
+  pruneopts = "T"
+  revision = "70078a794e8ea4b497ba7c19a78cd60f90ccf0f4"
+  version = "v1.1.0"
+
+[[projects]]
   digest = "1:6b7aa2e41ae57764e03748d82b8f74ab9bb317ad0dc08a5cae971ef5e2ada435"
   name = "github.com/levigross/grequests"
   packages = ["."]
@@ -1052,7 +1060,7 @@
     "libcontainer/user",
   ]
   pruneopts = "T"
-  revision = "25f3f893c86d07426df93b7aa172f33fdf093fbd"
+  revision = "859f74576e7af6b3351f7b60f5327c7047655963"
 
 [[projects]]
   branch = "master"
@@ -1266,7 +1274,7 @@
     "eventflow",
   ]
   pruneopts = "T"
-  revision = "e0b15a6a3390175c4b1cad1ba93c8e3a4155d9cf"
+  revision = "16cceef562133745dcff50d1e07cb25383b48794"
 
 [[projects]]
   branch = "master"
@@ -1274,7 +1282,7 @@
   name = "github.com/rai-project/go-caffe2"
   packages = ["."]
   pruneopts = "T"
-  revision = "4ddcaac2270f4d4b5e1d327492f9f47df34a423c"
+  revision = "d89ddc6dc79a6fb06d4459c5fe4f0a2e1ce7484b"
 
 [[projects]]
   branch = "master"
@@ -1990,7 +1998,7 @@
     "windows",
   ]
   pruneopts = "T"
-  revision = "70b957f3b65e069b4930ea94e2721eefa0f8f695"
+  revision = "ad97f365e15054527b467150f898ec66d7f81e14"
 
 [[projects]]
   digest = "1:6164911cb5e94e8d8d5131d646613ff82c14f5a8ce869de2f6d80d9889df8c5a"
@@ -2154,8 +2162,8 @@
   name = "gopkg.in/go-playground/validator.v9"
   packages = ["."]
   pruneopts = "T"
-  revision = "1fa3c8d6336562f0a3f95c73593ee2b57ff4da11"
-  version = "v9.23.0"
+  revision = "0277b12d53df79c9dbf7311cb07fa9c81ed621bb"
+  version = "v9.24.0"
 
 [[projects]]
   digest = "0:"
