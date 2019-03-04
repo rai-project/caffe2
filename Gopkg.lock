@@ -1265,7 +1265,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:5a7a03486acedca207077c058429840429616dab457a0d65e07012c2c82a0715"
+  digest = "0:"
   name = "github.com/rai-project/evaluation"
   packages = [
     ".",
@@ -1273,7 +1273,7 @@
     "eventflow",
   ]
   pruneopts = "T"
-  revision = "c23eb2a40d5f39e422668df90b39f1451cbe542a"
+  revision = "f540772e297efb0b9b1992fa4db5bfcd141819e0"
 
 [[projects]]
   branch = "master"
