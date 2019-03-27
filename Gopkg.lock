@@ -1274,7 +1274,7 @@
   name = "github.com/rai-project/go-caffe2"
   packages = ["."]
   pruneopts = "T"
-  revision = "4ddcaac2270f4d4b5e1d327492f9f47df34a423c"
+  revision = "30d84bf756005c87d1d49ede07521809a96f5e78"
 
 [[projects]]
   branch = "master"
