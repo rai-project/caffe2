@@ -16,7 +16,7 @@ import (
 	"github.com/rai-project/dlframework"
 	"github.com/rai-project/dlframework/framework/agent"
 	"github.com/rai-project/dlframework/framework/options"
-	common "github.com/rai-project/dlframework/framework/predict"
+	common "github.com/rai-project/dlframework/framework/predictor"
 	"github.com/rai-project/downloadmanager"
 	gocaffe2 "github.com/rai-project/go-caffe2"
 	"github.com/rai-project/image"
